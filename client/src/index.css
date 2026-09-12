@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Tree Mouse Cursor */
+:root {
+  /* Default Cursor: Crisp Green Tree / Sapling */
+  --cursor-tree: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 C13 3 10 5 10 9 C8 10 7 13 8 16 C9 19 11 20 14 21 L14 28 C14 29 15 30 16 30 C17 30 18 29 18 28 L18 21 C21 20 23 19 24 16 C25 13 24 10 22 9 C22 5 19 3 16 3 Z' fill='%2315803d' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='12' r='2' fill='%2386efac'/%3E%3C/svg%3E"), auto;
+
+  /* Pointer Cursor (Hover on buttons / links): Glowing Golden-Green Budding Tree */
+  --cursor-tree-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 C12 2 9 4.5 9 9 C7 10 6 13.5 7 17 C8.5 20.5 11 21.5 14 22 L14 29 C14 30 15 31 16 31 C17 31 18 30 18 29 L18 22 C21 21.5 23.5 20.5 25 17 C26 13.5 25 10 23 9 C23 4.5 20 2 16 2 Z' fill='%2316a34a' stroke='%23fef08a' stroke-width='2' stroke-linejoin='round'/%3E%3Cpath d='M16 7 Q14 13 11 15' stroke='%23ffffff' stroke-width='1' fill='none'/%3E%3Cpath d='M16 10 Q18 14 21 16' stroke='%23ffffff' stroke-width='1' fill='none'/%3E%3Ccircle cx='16' cy='8' r='2.5' fill='%23fef08a'/%3E%3C/svg%3E"), pointer;
+}
+
+body {
+  cursor: var(--cursor-tree);
+  user-select: text;
+  background-color: #fcfbf9;
+}
+
+a, button, input[type="submit"], input[type="button"], select, [role="button"], .clickable {
+  cursor: var(--cursor-tree-pointer) !important;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(22, 163, 74, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(22, 163, 74, 0.6);
+}
+
+/* Leaflet Container Overrides */
+.leaflet-container {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  z-index: 10;
+  border-radius: 0.75rem;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 1rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(22, 101, 52, 0.1);
+}
+
+.glass-panel-dark {
+  background: rgba(20, 83, 45, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}

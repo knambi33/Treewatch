@@ -1,0 +1,25 @@
+{
+  "name": "treewatch",
+  "version": "1.0.0",
+  "description": "TreeWatch — Every Tree Counts. Keep It Alive. Tree Planting & Survival Tracker",
+  "main": "run-dev.js",
+  "scripts": {
+    "dev": "node run-dev.js",
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start"
+  },
+  "keywords": [
+    "treewatch",
+    "tree-survival",
+    "esg",
+    "tree-tracking",
+    "computer-vision",
+    "geofencing",
+    "carbon-credits"
+  ],
+  "author": "TreeWatch",
+  "license": "ISC"
+}
