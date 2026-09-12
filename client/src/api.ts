@@ -11,7 +11,9 @@ import {
   SurvivalMetrics,
 } from './types';
 
-export const API_BASE = (import.meta.env.VITE_API_URL ? (import.meta.env.VITE_API_URL as string).replace(/\/$/, '') : '') + '/api';
+const rawApiUrl = (import.meta.env.VITE_API_URL as string || '').trim().replace(/\/$/, '');
+const normalizedApiUrl = rawApiUrl ? (rawApiUrl.startsWith('http://') || rawApiUrl.startsWith('https://') ? rawApiUrl : `https://${rawApiUrl}`) : '';
+export const API_BASE = (normalizedApiUrl ? normalizedApiUrl : '') + '/api';
 
 export async function fetchUsers(): Promise<User[]> {
   const res = await fetch(`${API_BASE}/auth/users`);
