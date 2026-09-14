@@ -18,6 +18,7 @@ import {
   Trophy,
   BookOpen,
   Sliders,
+  Download,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useOffline } from '../../context/OfflineContext';
@@ -31,6 +32,7 @@ interface NavbarProps {
   onOpenQRScanner: () => void;
   onOpenRegisterModal: () => void;
   onOpenAdminConfig?: () => void;
+  onOpenInstallPWA?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -39,6 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenQRScanner,
   onOpenRegisterModal,
   onOpenAdminConfig,
+  onOpenInstallPWA,
 }) => {
   const { currentUser, allUsers, switchUser } = useAuth();
   const { isOffline, setIsOffline, pendingQueue, isSyncing, syncPendingItems } = useOffline();
@@ -215,6 +218,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Sliders className="w-3.5 h-3.5 text-stone-600" />
               <span className="hidden xl:inline">Scoring Rules</span>
+            </button>
+          )}
+
+          {/* Install PWA App Button */}
+          {onOpenInstallPWA && (
+            <button
+              onClick={onOpenInstallPWA}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 text-white rounded-xl text-xs font-bold shadow-xs hover:scale-105 transition-all"
+              title="Install TreeWatch PWA Mobile App to your device"
+            >
+              <Download className="w-3.5 h-3.5 animate-pulse" />
+              <span className="hidden lg:inline">Install App</span>
             </button>
           )}
 

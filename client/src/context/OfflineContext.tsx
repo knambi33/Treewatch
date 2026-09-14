@@ -22,10 +22,10 @@ interface OfflineContextType {
 const OfflineContext = createContext<OfflineContextType | undefined>(undefined);
 
 export const OfflineProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isOffline, setIsOffline] = useState(false);
+  const [isOffline, setIsOffline] = useState(() => !navigator.onLine);
   const [pendingQueue, setPendingQueue] = useState<QueuedItem[]>(() => {
     try {
-      const saved = localStorage.getItem('treesurvive_offline_queue');
+      const saved = localStorage.getItem('treewatch_offline_queue') || localStorage.getItem('treesurvive_offline_queue');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -33,6 +33,26 @@ export const OfflineProvider: React.FC<{ children: React.ReactNode }> = ({ child
   });
   const [isSyncing, setIsSyncing] = useState(false);
   const [lastSyncMessage, setLastSyncMessage] = useState<string | null>(null);
+
+  // Synchronize with native browser network events
+  useEffect(() => {
+    const handleOnline = () => {
+      console.log('[TreeWatch] Connection restored: online');
+      setIsOffline(false);
+    };
+    const handleOffline = () => {
+      console.log('[TreeWatch] Cellular connection lost: offline field mode');
+      setIsOffline(true);
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('treewatch_offline_queue', JSON.stringify(pendingQueue));

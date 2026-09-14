@@ -26,6 +26,7 @@ import { RegisterTree } from './pages/RegisterTree';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { MethodologyPage } from './pages/MethodologyPage';
 import { AdminConfigModal } from './components/common/AdminConfigModal';
+import { InstallPWAModal } from './components/common/InstallPWAModal';
 
 import { fetchTrees, fetchProjects, fetchOrganisations, fetchTreeDetails } from './api';
 import { Tree, Project, Organisation, TimelineEvent, Verification, TreePhoto } from './types';
@@ -53,6 +54,53 @@ function MainApp() {
   const [showQRScanner, setShowQRScanner] = useState<boolean>(false);
   const [showOnboardingModal, setShowOnboardingModal] = useState<boolean>(false);
   const [showAdminConfigModal, setShowAdminConfigModal] = useState<boolean>(false);
+  const [showInstallModal, setShowInstallModal] = useState<boolean>(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isPWAInstalled, setIsPWAInstalled] = useState<boolean>(false);
+
+  // Capture PWA installation triggers and shortcut URLs
+  useEffect(() => {
+    // Check if running in standalone PWA mode
+    if (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any).standalone === true
+    ) {
+      setIsPWAInstalled(true);
+    }
+
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      console.log('[TreeWatch PWA] beforeinstallprompt captured');
+      setDeferredPrompt(e);
+    };
+
+    const handleAppInstalled = () => {
+      console.log('[TreeWatch PWA] App was successfully installed');
+      setIsPWAInstalled(true);
+      setDeferredPrompt(null);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    // Handle home screen shortcuts launched from manifest (e.g. ?action=plant)
+    const params = new URLSearchParams(window.location.search);
+    const action = params.get('action');
+    const tab = params.get('tab');
+
+    if (action === 'plant') {
+      setShowRegisterModal(true);
+    } else if (action === 'camera') {
+      setShowQRScanner(true);
+    } else if (tab) {
+      setCurrentTab(tab);
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
 
   // Fetch initial data
   const loadData = async () => {
@@ -124,6 +172,7 @@ function MainApp() {
         onOpenQRScanner={() => setShowQRScanner(true)}
         onOpenRegisterModal={() => setShowOnboardingModal(true)}
         onOpenAdminConfig={() => setShowAdminConfigModal(true)}
+        onOpenInstallPWA={!isPWAInstalled ? () => setShowInstallModal(true) : undefined}
       />
 
       {/* Main Content Viewport wrapped in Device Frame Toggle */}
@@ -300,6 +349,17 @@ function MainApp() {
         <AdminConfigModal
           onClose={() => setShowAdminConfigModal(false)}
           onConfigSaved={loadData}
+        />
+      )}
+
+      {showInstallModal && (
+        <InstallPWAModal
+          onClose={() => setShowInstallModal(false)}
+          deferredPrompt={deferredPrompt}
+          onInstallAccepted={() => {
+            setIsPWAInstalled(true);
+            setShowInstallModal(false);
+          }}
         />
       )}
     </div>
