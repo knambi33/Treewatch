@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ArrowLeft,
   Calendar,
@@ -15,11 +15,18 @@ import {
   AlertTriangle,
   History,
   TrendingUp,
+  Droplets,
+  Plus,
+  HelpCircle,
 } from 'lucide-react';
-import { Tree, TimelineEvent, Verification, TreePhoto } from '../types';
+import { Tree, TimelineEvent, Verification, TreePhoto, TreeScoreData, CareActivity } from '../types';
 import { StatusBadge } from '../components/common/StatusBadge';
 import { EvidenceBadge } from '../components/common/EvidenceBadge';
 import { QRViewerModal } from '../components/common/QRViewerModal';
+import { TreeScoreBadge } from '../components/common/TreeScoreBadge';
+import { TreeScoreBreakdownCard } from '../components/common/TreeScoreBreakdownCard';
+import { TreeLifecycleVisualizer } from '../components/common/TreeLifecycleVisualizer';
+import { fetchTreeScore, recordCareActivity } from '../api';
 
 interface TreeDetailProps {
   tree: Tree;
@@ -28,6 +35,7 @@ interface TreeDetailProps {
   photos: TreePhoto[];
   onBack: () => void;
   onVerifyClick: () => void;
+  onOpenMethodology?: () => void;
 }
 
 export const TreeDetail: React.FC<TreeDetailProps> = ({
@@ -37,9 +45,57 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
   photos,
   onBack,
   onVerifyClick,
+  onOpenMethodology,
 }) => {
   const [showQRModal, setShowQRModal] = useState(false);
-  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
+  const [treeScore, setTreeScore] = useState<TreeScoreData | null>(null);
+  const [loadingScore, setLoadingScore] = useState(true);
+
+  // Care Log modal state
+  const [showCareModal, setShowCareModal] = useState(false);
+  const [selectedActivity, setSelectedActivity] = useState<string>('Watering');
+  const [careNotes, setCareNotes] = useState<string>('');
+  const [savingCare, setSavingCare] = useState(false);
+
+  // Load TreeScore
+  const loadScore = () => {
+    setLoadingScore(true);
+    fetchTreeScore(tree.id)
+      .then((data) => {
+        if (data && data.score !== undefined) {
+          setTreeScore(data);
+        }
+      })
+      .catch((err) => console.error('Failed to load tree score:', err))
+      .finally(() => setLoadingScore(false));
+  };
+
+  useEffect(() => {
+    loadScore();
+  }, [tree.id]);
+
+  const handleRecordCare = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavingCare(true);
+    try {
+      await recordCareActivity(tree.id, {
+        activityType: selectedActivity,
+        recordedByUserId: tree.caretakerId || 'USR-PLANTER-01',
+        recordedByUserName: tree.caretakerName || 'Guardian',
+        notes: careNotes,
+      });
+      setShowCareModal(false);
+      setCareNotes('');
+      loadScore();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSavingCare(false);
+    }
+  };
+
+  // Option A badge: Demo Benchmark vs Live Verified
+  const isDemoTree = tree.id.includes('DEMO') || (tree.notes && tree.notes.includes('DEMO'));
 
   // All photos for growth journey
   const photoHistory: Array<{
@@ -73,6 +129,14 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
 
         <div className="flex items-center gap-2">
           <button
+            onClick={() => setShowCareModal(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-bold text-stone-700 hover:bg-stone-100 shadow-2xs transition-all"
+          >
+            <Droplets className="w-4 h-4 text-amber-600" />
+            <span>+ Log Care Event</span>
+          </button>
+
+          <button
             onClick={() => setShowQRModal(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-bold text-stone-700 hover:bg-stone-100 shadow-2xs transition-all"
           >
@@ -90,35 +154,59 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
         </div>
       </div>
 
-      {/* Main Profile Header Card */}
+      {/* Main Profile Header Card with TreeWatch Score™ */}
       <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 shadow-md border border-stone-200/80 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div className="space-y-1.5">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-sm font-extrabold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-lg">
                 {tree.treeCode}
               </span>
               <StatusBadge status={tree.status} size="sm" />
               <EvidenceBadge quality={tree.evidenceQuality} />
+
+              {/* Option A Badge */}
+              {isDemoTree ? (
+                <span className="px-2 py-0.5 bg-amber-100 text-amber-900 border border-amber-300/80 rounded-md text-[10px] font-extrabold tracking-wide">
+                  DEMO BENCHMARK DATA
+                </span>
+              ) : (
+                <span className="px-2 py-0.5 bg-emerald-100 text-emerald-900 border border-emerald-300/80 rounded-md text-[10px] font-extrabold tracking-wide">
+                  LIVE VERIFIED AUDIT
+                </span>
+              )}
             </div>
+
             <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight">
               {tree.species}{' '}
               <span className="text-base font-normal text-stone-500">
                 ({tree.commonName})
               </span>
             </h1>
-            <p className="text-xs text-stone-500 italic mt-0.5">
+            <p className="text-xs text-stone-500 italic">
               Scientific Name: {tree.scientificName}
             </p>
+
+            <div className="pt-1 text-xs text-stone-600">
+              <span className="font-bold text-stone-800">Project:</span> {tree.projectName} &bull;{' '}
+              <span className="text-stone-500">{tree.organisationName}</span>
+            </div>
           </div>
 
-          <div className="text-left sm:text-right">
-            <span className="text-xs text-stone-400 block font-bold uppercase tracking-wider">
-              Project
-            </span>
-            <span className="text-xs font-bold text-emerald-900 block">{tree.projectName}</span>
-            <span className="text-[11px] text-stone-500">{tree.organisationName}</span>
-          </div>
+          {/* Prominent TreeWatch Score Circular Gauge */}
+          {treeScore && (
+            <div className="shrink-0 bg-stone-50/80 p-4 rounded-3xl border border-stone-200/80 flex flex-col items-center">
+              <span className="text-[10px] font-extrabold text-stone-400 uppercase tracking-widest mb-1.5">
+                TREEWATCH SCORE™
+              </span>
+              <TreeScoreBadge
+                score={treeScore.score}
+                category={treeScore.category}
+                isEstablished={treeScore.established}
+                size="md"
+              />
+            </div>
+          )}
         </div>
 
         {/* Key Metrics Grid */}
@@ -165,7 +253,86 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
         </div>
       </div>
 
-      {/* Growth Journey & Visual Timeline (Section 41) */}
+      {/* 6-Component Breakdown Card */}
+      {treeScore && (
+        <TreeScoreBreakdownCard
+          components={treeScore.components}
+          totalScore={treeScore.score}
+          verifiedSurvivalDays={treeScore.verifiedSurvivalDays}
+          treeYears={treeScore.treeYears}
+          improvementTip={treeScore.improvementTip}
+          isDead={treeScore.isDead}
+          onOpenMethodology={onOpenMethodology}
+        />
+      )}
+
+      {/* Visual Lifecycle Stepper (Section 17) */}
+      {treeScore && (
+        <TreeLifecycleVisualizer
+          score={treeScore.score}
+          category={treeScore.category}
+          isEstablished={treeScore.established}
+        />
+      )}
+
+      {/* Score History Progression ("Why did my TreeScore change?" - Section 19) */}
+      {treeScore?.history && treeScore.history.length > 0 && (
+        <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 shadow-md border border-stone-200/80 space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-base font-extrabold text-stone-900 flex items-center gap-2">
+                <History className="w-5 h-5 text-emerald-600" />
+                <span>TreeScore™ Historical Progression</span>
+              </h3>
+              <p className="text-xs text-stone-500">
+                Auditable timeline explaining why your score changed across verification milestones
+              </p>
+            </div>
+            <span className="text-xs text-stone-400 font-mono">
+              {treeScore.history.length} audit records
+            </span>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-stone-50 text-stone-500 font-bold uppercase text-[10px] tracking-wider border-b border-stone-200">
+                  <th className="py-2.5 px-3">Date</th>
+                  <th className="py-2.5 px-3 text-center">Score</th>
+                  <th className="py-2.5 px-3 text-center">Change</th>
+                  <th className="py-2.5 px-3">Audit Rationale</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-stone-100 font-medium">
+                {treeScore.history.map((hist, idx) => (
+                  <tr key={hist.id || idx} className="hover:bg-stone-50/80">
+                    <td className="py-3 px-3 font-mono text-stone-600">{hist.date}</td>
+                    <td className="py-3 px-3 text-center font-extrabold text-stone-900">
+                      {hist.score.toFixed(1)}
+                    </td>
+                    <td className="py-3 px-3 text-center">
+                      {hist.change > 0 ? (
+                        <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded">
+                          +{hist.change.toFixed(1)}
+                        </span>
+                      ) : hist.change < 0 ? (
+                        <span className="text-rose-700 font-bold bg-rose-50 px-2 py-0.5 rounded">
+                          {hist.change.toFixed(1)}
+                        </span>
+                      ) : (
+                        <span className="text-stone-400">&mdash;</span>
+                      )}
+                    </td>
+                    <td className="py-3 px-3 text-stone-700">{hist.reason}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Growth Journey & Visual Photographic Audit */}
       <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 shadow-md border border-stone-200/80 space-y-4">
         <div className="flex items-center justify-between">
           <div>
@@ -215,7 +382,7 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
         </div>
       </div>
 
-      {/* Complete Historical Audit Timeline (Section 14) */}
+      {/* Auditable Verification Timeline */}
       <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 shadow-md border border-stone-200/80 space-y-4">
         <div>
           <h3 className="text-base font-extrabold text-stone-900 flex items-center gap-2">
@@ -230,7 +397,6 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
         <div className="relative pl-6 space-y-6 before:absolute before:inset-0 before:left-2 before:w-0.5 before:bg-stone-200">
           {timeline.map((event) => (
             <div key={event.id} className="relative group">
-              {/* Timeline Dot */}
               <div className="absolute -left-6 top-1 w-4 h-4 rounded-full bg-white border-2 border-emerald-600 flex items-center justify-center shadow-xs">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
               </div>
@@ -253,6 +419,75 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
           ))}
         </div>
       </div>
+
+      {/* Log Care Event Modal */}
+      {showCareModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <form
+            onSubmit={handleRecordCare}
+            className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4"
+          >
+            <div className="flex items-center justify-between border-b border-stone-100 pb-3">
+              <div className="flex items-center gap-2">
+                <Droplets className="w-5 h-5 text-amber-600" />
+                <h3 className="text-base font-extrabold text-stone-900">Log Care & Maintenance</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowCareModal(false)}
+                className="text-stone-400 hover:text-stone-600"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="space-y-3 text-xs">
+              <div>
+                <label className="font-bold text-stone-700 block mb-1">Activity Type</label>
+                <select
+                  value={selectedActivity}
+                  onChange={(e) => setSelectedActivity(e.target.value)}
+                  className="w-full p-2.5 rounded-xl border border-stone-300 bg-white"
+                >
+                  <option value="Watering">💧 Deep Root Watering</option>
+                  <option value="Mulching">🍂 Organic Mulch Ring</option>
+                  <option value="Protection">🛡️ Protective Tree Guard / Staking</option>
+                  <option value="Weeding">🌿 Weeding & Soil Aeration</option>
+                  <option value="Soil Improvement">🌱 Compost / Organic Nutrient Amendment</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="font-bold text-stone-700 block mb-1">Observations / Notes</label>
+                <textarea
+                  rows={3}
+                  value={careNotes}
+                  onChange={(e) => setCareNotes(e.target.value)}
+                  placeholder="e.g. Added 10L water and compost ring around drip line."
+                  className="w-full p-2.5 rounded-xl border border-stone-300 bg-white"
+                />
+              </div>
+            </div>
+
+            <div className="pt-2 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setShowCareModal(false)}
+                className="px-4 py-2 font-bold text-stone-600 hover:bg-stone-100 rounded-xl text-xs"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={savingCare}
+                className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl text-xs shadow-xs disabled:opacity-50"
+              >
+                {savingCare ? 'Saving...' : 'Save & Recalculate Score'}
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
       {/* QR Viewer Modal */}
       {showQRModal && <QRViewerModal tree={tree} onClose={() => setShowQRModal(false)} />}

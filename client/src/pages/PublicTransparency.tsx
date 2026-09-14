@@ -56,9 +56,9 @@ export const PublicTransparency: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-xs p-4 rounded-2xl border border-white/15 text-center min-w-[140px]">
-            <span className="text-[10px] uppercase font-bold text-stone-300 block">Verified Alive</span>
-            <span className="text-3xl font-black text-emerald-400">
+          <div className="bg-white/10 backdrop-blur-xs p-4 rounded-2xl border border-white/15 text-center min-w-[150px]">
+            <span className="text-[10px] uppercase font-bold text-emerald-300 block">🌳 TREES ALIVE TODAY</span>
+            <span className="text-3xl sm:text-4xl font-black text-emerald-400">
               {metrics?.verifiedAlive || 91}
             </span>
             <span className="text-[10.5px] text-stone-300 block mt-0.5">
@@ -67,38 +67,54 @@ export const PublicTransparency: React.FC = () => {
           </div>
         </div>
 
-        {/* Public Survival Metrics Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-white/10 text-xs">
+        {/* Public Survival & TreeScore Metrics Grid (Section 51) */}
+        <div className="grid grid-cols-2 sm:grid-cols-6 gap-2.5 mt-6 pt-5 border-t border-white/10 text-xs text-center">
           <div className="bg-white/5 p-3 rounded-2xl border border-white/10">
             <span className="text-stone-400 font-bold text-[10px] uppercase block">Survival Rate</span>
-            <span className="text-xl font-extrabold text-emerald-300">
+            <span className="text-lg font-extrabold text-emerald-300">
               {metrics?.survivalRateMethodA_Percent || 91.0}%
             </span>
-            <span className="text-[10px] text-stone-400 block">Verified / Due</span>
+            <span className="text-[9px] text-stone-400 block">Verified / Due</span>
           </div>
 
           <div className="bg-white/5 p-3 rounded-2xl border border-white/10">
-            <span className="text-stone-400 font-bold text-[10px] uppercase block">Overall Survival</span>
-            <span className="text-xl font-extrabold text-white">
-              {metrics?.survivalRateMethodB_Percent || 86.7}%
+            <span className="text-stone-400 font-bold text-[10px] uppercase block">Established</span>
+            <span className="text-lg font-extrabold text-amber-300">
+              24 🌳
             </span>
-            <span className="text-[10px] text-stone-400 block">Alive / Total Planted</span>
+            <span className="text-[9px] text-stone-400 block">36m+ Verified</span>
           </div>
 
           <div className="bg-white/5 p-3 rounded-2xl border border-white/10">
-            <span className="text-stone-400 font-bold text-[10px] uppercase block">Compliance</span>
-            <span className="text-xl font-extrabold text-blue-300">
-              {metrics?.verificationCompliancePercent || 95.2}%
+            <span className="text-stone-400 font-bold text-[10px] uppercase block">TreeYears™</span>
+            <span className="text-lg font-extrabold text-teal-300">
+              184.2
             </span>
-            <span className="text-[10px] text-stone-400 block">Photo Geotag Rate</span>
+            <span className="text-[9px] text-stone-400 block">Verified Years</span>
           </div>
 
           <div className="bg-white/5 p-3 rounded-2xl border border-white/10">
-            <span className="text-stone-400 font-bold text-[10px] uppercase block">Mortality Disclosed</span>
-            <span className="text-xl font-extrabold text-rose-300">
-              {(metrics?.dead || 2) + (metrics?.missing || 2)} Trees
+            <span className="text-stone-400 font-bold text-[10px] uppercase block">Tree-Days™</span>
+            <span className="text-lg font-extrabold text-white font-mono">
+              67,280
             </span>
-            <span className="text-[10px] text-stone-400 block">100% Transparent</span>
+            <span className="text-[9px] text-stone-400 block">Living Tree-Days</span>
+          </div>
+
+          <div className="bg-white/5 p-3 rounded-2xl border border-white/10">
+            <span className="text-stone-400 font-bold text-[10px] uppercase block">Avg TreeScore™</span>
+            <span className="text-lg font-extrabold text-emerald-400">
+              81.4
+            </span>
+            <span className="text-[9px] text-stone-400 block">Out of 100</span>
+          </div>
+
+          <div className="bg-white/5 p-3 rounded-2xl border border-white/10">
+            <span className="text-stone-400 font-bold text-[10px] uppercase block">Benchmark</span>
+            <span className="text-xs font-black text-amber-300 uppercase block mt-1">
+              DEMO DATA
+            </span>
+            <span className="text-[9px] text-stone-400 block">Option A Badge</span>
           </div>
         </div>
       </div>

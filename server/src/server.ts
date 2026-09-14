@@ -14,6 +14,7 @@ import { analyticsRouter } from './routes/analytics.js';
 import { reportsRouter } from './routes/reports.js';
 import { publicRouter } from './routes/public.js';
 import { notificationsRouter } from './routes/notifications.js';
+import { scoreRouter } from './routes/scoreRoutes.js';
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ app.use('/api/analytics', analyticsRouter);
 app.use('/api/reports', reportsRouter);
 app.use('/api/public', publicRouter);
 app.use('/api/notifications', notificationsRouter);
+app.use('/api', scoreRouter);
 
 app.get('/api/health', (req, res) => {
   res.json({

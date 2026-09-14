@@ -237,3 +237,119 @@ export interface SurvivalMetrics {
   survivalRateMethodB_Percent: number; // Verified Alive / Total Planted
   verificationCompliancePercent: number;
 }
+
+export type TreeScoreCategory = 
+  | '🌱 Newly Planted'
+  | '🌿 Establishing'
+  | '🌳 Surviving'
+  | '🌳 Thriving'
+  | '🌳 Established'
+  | '🏆 TreeWatch Champion';
+
+export interface TreeScoreComponents {
+  planting: number;     // Max 10
+  location: number;     // Max 10
+  monitoring: number;   // Max 15
+  survival: number;     // Max 35
+  health: number;       // Max 20
+  maintenance: number;  // Max 10
+}
+
+export interface TreeScoreData {
+  treeId: string;
+  treeCode: string;
+  score: number;
+  category: TreeScoreCategory;
+  components: TreeScoreComponents;
+  verifiedSurvivalDays: number;
+  treeYears: number;
+  treeDays: number;
+  established: boolean;
+  lastVerified?: string;
+  improvementTip: string;
+  isDead: boolean;
+  lifetimeScore?: number;
+  methodologyVersion: string;
+  scoreDate: string;
+  history?: TreeScoreHistoryItem[];
+  careActivities?: CareActivity[];
+}
+
+export interface TreeScoreHistoryItem {
+  id: string;
+  treeId: string;
+  date: string;
+  score: number;
+  change: number;
+  reason: string;
+  components: any;
+}
+
+export interface CareActivity {
+  id: string;
+  treeId: string;
+  activityType: 'Watering' | 'Mulching' | 'Weeding' | 'Protection' | 'Staking' | 'Pest Control' | 'Soil Improvement' | 'Guarding' | 'Care Plan Assigned';
+  date: string;
+  recordedByUserId: string;
+  recordedByUserName: string;
+  notes?: string;
+  photoUrl?: string;
+}
+
+export interface GuardianScore {
+  guardianId: string;
+  guardianName: string;
+  scoreDate: string;
+  treesCount: number;
+  aliveCount: number;
+  survivalScore: number;       // 40% weight
+  monitoringScore: number;     // 25% weight
+  careScore: number;           // 20% weight
+  verificationQualityScore: number; // 10% weight
+  integrityScore: number;      // 5% weight (+2 points for reporting mortality)
+  totalGuardianScore: number;  // 0 - 100
+  badge: string;
+}
+
+export interface GeoScore {
+  id: string;
+  geoLevel: 'individual' | 'school' | 'ngo' | 'city' | 'district' | 'state' | 'national' | 'ward';
+  geoId: string;
+  geoName: string;
+  state?: string;
+  badge?: string;
+  integrityScore?: number;
+  eligibleTreeCount: number;
+  minEligibleRequired: number;
+  isEligibleForRanking: boolean;
+  rawScore: number;
+  adjustedScore: number;
+  verifiedSurvivalRate: number;
+  averageTreeScore: number;
+  monitoringCompliance: number;
+  healthRate: number;
+  evidenceQualityRate: number;
+  establishedCount: number;
+  treeYears: number;
+  rank: number;
+  previousRank?: number;
+  scoreChange?: number;
+  isRisingLeader?: boolean;
+}
+
+export interface AdminScoringConfig {
+  gpsToleranceMetersDefault: number;
+  gpsAccuracyMaxMeters: number;
+  monitoringGracePeriodDays: number;
+  aiSimilarityThresholdHigh: number;
+  aiSimilarityThresholdModerate: number;
+  establishmentMinAgeMonths: number;
+  establishmentMinVerifications: number;
+  bayesianConfidenceConstantK: number;
+  minSampleNational: number;
+  minSampleState: number;
+  minSampleDistrict: number;
+  minSampleLocal: number;
+  methodologyVersion: string;
+}
+

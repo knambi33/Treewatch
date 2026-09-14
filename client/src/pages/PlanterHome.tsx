@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Sprout,
   CheckCircle2,
@@ -10,11 +10,14 @@ import {
   ArrowRight,
   TrendingUp,
   MapPin,
+  Trophy,
+  Award,
 } from 'lucide-react';
-import { Tree } from '../types';
+import { Tree, GuardianScore } from '../types';
 import { StatusBadge } from '../components/common/StatusBadge';
 import { EvidenceBadge } from '../components/common/EvidenceBadge';
 import { useAuth } from '../context/AuthContext';
+import { fetchGuardianScore } from '../api';
 
 interface PlanterHomeProps {
   trees: Tree[];
@@ -22,6 +25,7 @@ interface PlanterHomeProps {
   onVerifyTree: (tree: Tree) => void;
   onPlantTreeClick: () => void;
   onScanQRClick: () => void;
+  onOpenLeaderboard?: () => void;
 }
 
 export const PlanterHome: React.FC<PlanterHomeProps> = ({
@@ -30,10 +34,22 @@ export const PlanterHome: React.FC<PlanterHomeProps> = ({
   onVerifyTree,
   onPlantTreeClick,
   onScanQRClick,
+  onOpenLeaderboard,
 }) => {
   const { currentUser } = useAuth();
   const [filterType, setFilterType] = useState<'all' | 'due' | 'attention'>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [guardianScore, setGuardianScore] = useState<GuardianScore | null>(null);
+
+  useEffect(() => {
+    if (currentUser?.id) {
+      fetchGuardianScore(currentUser.id)
+        .then((res) => {
+          if (res.success) setGuardianScore(res.guardianScore);
+        })
+        .catch(() => {});
+    }
+  }, [currentUser]);
 
   // Planter's assigned trees or all trees in view
   const myTrees = trees.filter(
@@ -72,44 +88,50 @@ export const PlanterHome: React.FC<PlanterHomeProps> = ({
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
           <div>
-            <div className="flex items-center gap-2 text-emerald-200 text-xs font-bold uppercase tracking-wider mb-1">
+            <div className="flex flex-wrap items-center gap-2 text-emerald-200 text-xs font-bold uppercase tracking-wider mb-1">
               <Sprout className="w-4 h-4 text-emerald-300" />
               <span>Good morning, {currentUser?.name || 'Tree Planter'}!</span>
+              <span className="px-2 py-0.5 bg-amber-500/20 text-amber-200 border border-amber-300/30 rounded-md text-[10px] font-bold">
+                DEMO BENCHMARK DATA
+              </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              TreeWatch Guardian
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+              Don't Just Plant Trees. Keep Them Alive.
             </h1>
-            <p className="text-xs text-emerald-100/80 mt-1 max-w-md">
-              Every Tree Counts. Keep It Alive. Complete your monthly photographic check-ins in less than 1 minute.
+            <p className="text-xs text-emerald-100/90 mt-1 max-w-md leading-relaxed">
+              Every Tree Counts. Every Month Matters. Powered by <strong>TreeWatch Score™</strong> GPS & photographic audit.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onScanQRClick}
-              className="px-3.5 py-2 bg-emerald-500/80 hover:bg-emerald-500 text-white text-xs font-extrabold rounded-2xl shadow-md hover:scale-102 transition-all flex items-center gap-1.5 border border-emerald-300/30"
-              title="Open camera to photograph and verify trees"
-            >
-              <Camera className="w-4 h-4" />
-              <span>Camera Verify</span>
-            </button>
-            <button
-              onClick={onPlantTreeClick}
-              className="px-4 py-2 bg-white hover:bg-emerald-50 text-emerald-900 text-xs font-extrabold rounded-2xl shadow-md hover:scale-102 transition-all flex items-center gap-1.5"
-            >
-              <span>+ Plant Tree</span>
-            </button>
-            <button
-              onClick={onScanQRClick}
-              className="p-2 bg-emerald-600/60 hover:bg-emerald-600 text-white rounded-2xl border border-emerald-400/30 transition-all"
-              title="Scan Tree QR Tag"
-            >
-              <QrCode className="w-5 h-5" />
-            </button>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            {guardianScore && (
+              <div className="bg-white/10 backdrop-blur-xs p-3 rounded-2xl border border-white/20 text-center min-w-[130px]">
+                <span className="text-[10px] uppercase font-bold text-emerald-200 block">GuardianScore™</span>
+                <span className="text-2xl font-black text-white">{guardianScore.totalGuardianScore.toFixed(1)}</span>
+                <span className="text-[10px] text-emerald-300 block font-bold mt-0.5">{guardianScore.badge}</span>
+              </div>
+            )}
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onScanQRClick}
+                className="px-3.5 py-2.5 bg-emerald-500/90 hover:bg-emerald-500 text-white text-xs font-extrabold rounded-2xl shadow-md hover:scale-102 transition-all flex items-center gap-1.5 border border-emerald-300/30"
+                title="Open camera to photograph and verify trees"
+              >
+                <Camera className="w-4 h-4" />
+                <span>Camera Verify</span>
+              </button>
+              <button
+                onClick={onPlantTreeClick}
+                className="px-4 py-2.5 bg-white hover:bg-emerald-50 text-emerald-900 text-xs font-extrabold rounded-2xl shadow-md hover:scale-102 transition-all flex items-center gap-1.5"
+              >
+                <span>+ Plant Tree</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* 4 Summary Cards as per Section 36 */}
+        {/* 4 Summary Cards + Leaderboard Banner */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-5 border-t border-white/15">
           <div className="bg-white/10 backdrop-blur-xs rounded-2xl p-3 border border-white/10">
             <span className="text-emerald-200 text-[11px] font-semibold block">Your Trees</span>
@@ -135,6 +157,22 @@ export const PlanterHome: React.FC<PlanterHomeProps> = ({
             <span className="text-2xl font-extrabold text-white">{dueTrees.length}</span>
           </div>
         </div>
+
+        {/* Green Leadership Callout Bar */}
+        {onOpenLeaderboard && (
+          <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2 text-emerald-200">
+              <Trophy className="w-4 h-4 text-amber-400" />
+              <span>Individuals are the prime drivers! Compete on the Green Leadership Leaderboard.</span>
+            </div>
+            <button
+              onClick={onOpenLeaderboard}
+              className="text-white font-extrabold hover:text-emerald-200 underline flex items-center gap-1"
+            >
+              <span>View Leaderboard &rarr;</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Action Prompt Cards (Section 36) */}

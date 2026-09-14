@@ -15,6 +15,9 @@ import {
   RefreshCw,
   UserPlus,
   Camera,
+  Trophy,
+  BookOpen,
+  Sliders,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useOffline } from '../../context/OfflineContext';
@@ -27,6 +30,7 @@ interface NavbarProps {
   setCurrentTab: (tab: string) => void;
   onOpenQRScanner: () => void;
   onOpenRegisterModal: () => void;
+  onOpenAdminConfig?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -34,6 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   setCurrentTab,
   onOpenQRScanner,
   onOpenRegisterModal,
+  onOpenAdminConfig,
 }) => {
   const { currentUser, allUsers, switchUser } = useAuth();
   const { isOffline, setIsOffline, pendingQueue, isSyncing, syncPendingItems } = useOffline();
@@ -201,6 +206,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="hidden sm:inline">+ Register</span>
           </button>
 
+          {/* Admin Scoring Config Tuning */}
+          {onOpenAdminConfig && (
+            <button
+              onClick={onOpenAdminConfig}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-xl text-xs font-semibold shadow-2xs transition-all"
+              title="TreeScore Engine Config & Threshold Tuning"
+            >
+              <Sliders className="w-3.5 h-3.5 text-stone-600" />
+              <span className="hidden xl:inline">Scoring Rules</span>
+            </button>
+          )}
+
           {/* Role Switcher Menu */}
           <div className="relative">
             <button
@@ -280,6 +297,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             🏠 Home Dashboard
+          </button>
+          <button
+            onClick={() => setCurrentTab('leaderboard')}
+            className={`px-3 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
+              currentTab === 'leaderboard'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+            }`}
+          >
+            <span>🏆 Green Leaders</span>
+            <span className="text-[9px] px-1 py-0.2 bg-amber-100 text-amber-900 border border-amber-300 rounded font-black">
+              LEADERBOARD
+            </span>
           </button>
           <button
             onClick={() => setCurrentTab('trees')}
@@ -370,6 +400,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             🌐 Public Transparency
+          </button>
+          <button
+            onClick={() => setCurrentTab('methodology')}
+            className={`px-3 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
+              currentTab === 'methodology'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+            }`}
+          >
+            <span>📖 TreeScore Methodology</span>
           </button>
           <button
             onClick={() => setCurrentTab('reports')}

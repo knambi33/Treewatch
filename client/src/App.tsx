@@ -23,6 +23,9 @@ import { PublicTransparency } from './pages/PublicTransparency';
 import { ReportsPage } from './pages/ReportsPage';
 import { TreeDetail } from './pages/TreeDetail';
 import { RegisterTree } from './pages/RegisterTree';
+import { LeaderboardPage } from './pages/LeaderboardPage';
+import { MethodologyPage } from './pages/MethodologyPage';
+import { AdminConfigModal } from './components/common/AdminConfigModal';
 
 import { fetchTrees, fetchProjects, fetchOrganisations, fetchTreeDetails } from './api';
 import { Tree, Project, Organisation, TimelineEvent, Verification, TreePhoto } from './types';
@@ -49,6 +52,7 @@ function MainApp() {
   const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
   const [showQRScanner, setShowQRScanner] = useState<boolean>(false);
   const [showOnboardingModal, setShowOnboardingModal] = useState<boolean>(false);
+  const [showAdminConfigModal, setShowAdminConfigModal] = useState<boolean>(false);
 
   // Fetch initial data
   const loadData = async () => {
@@ -119,6 +123,7 @@ function MainApp() {
         }}
         onOpenQRScanner={() => setShowQRScanner(true)}
         onOpenRegisterModal={() => setShowOnboardingModal(true)}
+        onOpenAdminConfig={() => setShowAdminConfigModal(true)}
       />
 
       {/* Main Content Viewport wrapped in Device Frame Toggle */}
@@ -140,6 +145,7 @@ function MainApp() {
                   onVerifyTree={handleVerifyTree}
                   onPlantTreeClick={() => setShowRegisterModal(true)}
                   onScanQRClick={() => setShowQRScanner(true)}
+                  onOpenLeaderboard={() => setCurrentTab('leaderboard')}
                 />
               )}
 
@@ -195,6 +201,23 @@ function MainApp() {
                   trees={trees}
                   onSelectTree={handleSelectTree}
                   onVerifyTree={handleVerifyTree}
+                />
+              )}
+
+              {currentTab === 'leaderboard' && (
+                <LeaderboardPage
+                  onSelectTree={(treeId) => {
+                    const found = trees.find((t) => t.id === treeId);
+                    if (found) handleSelectTree(found);
+                  }}
+                  onOpenMethodology={() => setCurrentTab('methodology')}
+                />
+              )}
+
+              {currentTab === 'methodology' && (
+                <MethodologyPage
+                  onBackToHome={() => setCurrentTab('home')}
+                  onExploreLeaderboard={() => setCurrentTab('leaderboard')}
                 />
               )}
 
@@ -270,6 +293,13 @@ function MainApp() {
           organisations={organisations}
           onClose={() => setShowOnboardingModal(false)}
           onSuccess={loadData}
+        />
+      )}
+
+      {showAdminConfigModal && (
+        <AdminConfigModal
+          onClose={() => setShowAdminConfigModal(false)}
+          onConfigSaved={loadData}
         />
       )}
     </div>

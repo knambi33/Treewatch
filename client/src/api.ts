@@ -9,6 +9,11 @@ import {
   ReviewQueueItem,
   NotificationItem,
   SurvivalMetrics,
+  TreeScoreData,
+  GuardianScore,
+  GeoScore,
+  AdminScoringConfig,
+  CareActivity,
 } from './types';
 
 const rawApiUrl = (import.meta.env.VITE_API_URL as string || '').trim().replace(/\/$/, '');
@@ -215,3 +220,80 @@ export async function fetchPublicTransparency(slug: string) {
   const res = await fetch(`${API_BASE}/public/organisations/${slug}`);
   return res.json();
 }
+
+// TreeScore™ API endpoints
+export async function fetchTreeScore(treeId: string): Promise<TreeScoreData> {
+  const res = await fetch(`${API_BASE}/trees/${treeId}/score`);
+  return res.json();
+}
+
+export async function recordCareActivity(
+  treeId: string,
+  payload: {
+    activityType: string;
+    recordedByUserId?: string;
+    recordedByUserName?: string;
+    notes?: string;
+    photoUrl?: string;
+  }
+) {
+  const res = await fetch(`${API_BASE}/trees/${treeId}/care`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  return res.json();
+}
+
+export async function fetchProjectScore(projectId: string) {
+  const res = await fetch(`${API_BASE}/projects/${projectId}/score`);
+  return res.json();
+}
+
+export async function fetchOrganisationScore(orgId: string) {
+  const res = await fetch(`${API_BASE}/organisations/${orgId}/score`);
+  return res.json();
+}
+
+export async function fetchGuardianScore(guardianId: string): Promise<{ success: boolean; guardianScore: GuardianScore }> {
+  const res = await fetch(`${API_BASE}/guardians/${guardianId}/score`);
+  return res.json();
+}
+
+export async function fetchLeaderboard(filters?: {
+  level?: string;
+  competition?: string;
+  timeRange?: string;
+}): Promise<{
+  success: boolean;
+  level: string;
+  competition: string;
+  timeRange: string;
+  methodologyVersion: string;
+  bayesianConfidenceConstantK: number;
+  updatedAt: string;
+  leaderboard: GeoScore[];
+}> {
+  const params = new URLSearchParams();
+  if (filters?.level) params.append('level', filters.level);
+  if (filters?.competition) params.append('competition', filters.competition);
+  if (filters?.timeRange) params.append('timeRange', filters.timeRange);
+
+  const res = await fetch(`${API_BASE}/geo/leaderboard?${params.toString()}`);
+  return res.json();
+}
+
+export async function fetchAdminScoringConfig(): Promise<{ success: boolean; config: AdminScoringConfig }> {
+  const res = await fetch(`${API_BASE}/admin/scoring-config`);
+  return res.json();
+}
+
+export async function updateAdminScoringConfig(config: Partial<AdminScoringConfig>) {
+  const res = await fetch(`${API_BASE}/admin/scoring-config`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(config),
+  });
+  return res.json();
+}
+
