@@ -23,6 +23,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { useOffline } from '../../context/OfflineContext';
 import { useView } from '../../context/ViewContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { fetchNotifications } from '../../api';
 import { NotificationItem } from '../../types';
 
@@ -46,6 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const { currentUser, allUsers, switchUser } = useAuth();
   const { isOffline, setIsOffline, pendingQueue, isSyncing, syncPendingItems } = useOffline();
   const { deviceMode, toggleDeviceMode } = useView();
+  const { language, toggleLanguage, t } = useLanguage();
 
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -84,7 +86,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </div>
               <p className="hidden md:block text-[10.5px] text-stone-600 font-medium leading-none mt-0.5">
-                Every tree counts, Verified Live
+                {t('tagline')}
               </p>
             </div>
           </button>
@@ -92,6 +94,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Action Controls & Role Switcher */}
         <div className="flex items-center gap-2">
+          {/* Language Switcher (English / தமிழ்) */}
+          <button
+            onClick={toggleLanguage}
+            title={language === 'en' ? 'தமிழில் மாற்றவும் (Switch to Tamil)' : 'Switch to English'}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold border transition-all bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-300 shadow-2xs cursor-pointer"
+          >
+            <Globe className="w-3.5 h-3.5 text-emerald-700" />
+            <span className="font-sans tracking-wide">{language === 'en' ? '🇮🇳 தமிழ்' : '🌐 English'}</span>
+          </button>
+
           {/* Device Frame Toggle (Mobile Preview vs Desktop) */}
           <button
             onClick={toggleDeviceMode}
@@ -311,7 +323,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🏠 Home Dashboard
+            🏠 {t('navHome')}
           </button>
           <button
             onClick={() => setCurrentTab('leaderboard')}
@@ -321,9 +333,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            <span>🏆 Green Leaders</span>
+            <span>🏆 {t('navLeaders')}</span>
             <span className="text-[9px] px-1 py-0.2 bg-amber-100 text-amber-900 border border-amber-300 rounded font-black">
-              LEADERBOARD
+              RANK
             </span>
           </button>
           <button
@@ -334,7 +346,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🌳 Tree Directory
+            🌳 {t('navTrees')}
           </button>
           <button
             onClick={() => setCurrentTab('map')}
@@ -344,7 +356,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🗺️ TreeView Map
+            {t('navMap')}
           </button>
           <button
             onClick={() => setCurrentTab('projects')}
@@ -364,7 +376,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🏢 TreeView Impact
+            {t('navImpact')}
           </button>
           <button
             onClick={() => setCurrentTab('ngo')}
@@ -374,7 +386,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🤝 TreeView NGO Hub
+            {t('navNGO')}
           </button>
           <button
             onClick={() => setCurrentTab('school')}
@@ -384,7 +396,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🏫 TreeView Green Campus
+            {t('navCampus')}
           </button>
           <button
             onClick={() => setCurrentTab('review')}
@@ -394,7 +406,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🔍 TreeView Review Queue
+            {t('navVerifyQueue')}
           </button>
           <button
             onClick={() => setCurrentTab('analytics')}
@@ -404,7 +416,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            📈 TreeView Survival Analytics
+            {t('navAnalytics')}
           </button>
           <button
             onClick={() => setCurrentTab('public')}
@@ -424,7 +436,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            <span>📖 TreeView Index Methodology</span>
+            <span>{t('navMethodology')}</span>
           </button>
           <button
             onClick={() => setCurrentTab('reports')}
@@ -434,7 +446,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            📄 Reports
+            📄 {t('navReports')}
           </button>
         </nav>
       </div>

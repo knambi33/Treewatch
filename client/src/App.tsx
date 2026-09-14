@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { OfflineProvider } from './context/OfflineContext';
 import { ViewProvider, useView } from './context/ViewContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { ActiveTreeBackground } from './components/common/ActiveTreeBackground';
 import { Navbar } from './components/layout/Navbar';
 import { MobileNav } from './components/layout/MobileNav';
@@ -371,7 +372,9 @@ export default function App() {
     <AuthProvider>
       <OfflineProvider>
         <ViewProvider>
-          <MainApp />
+          <LanguageProvider>
+            <MainApp />
+          </LanguageProvider>
         </ViewProvider>
       </OfflineProvider>
     </AuthProvider>

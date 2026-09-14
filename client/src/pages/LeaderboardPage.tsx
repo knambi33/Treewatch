@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { fetchLeaderboard } from '../api';
 import { GeoScore } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface LeaderboardPageProps {
   onSelectTree?: (treeId: string) => void;
@@ -30,6 +31,7 @@ interface LeaderboardPageProps {
 export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
   onOpenMethodology,
 }) => {
+  const { t } = useLanguage();
   const [currentLevel, setCurrentLevel] = useState<string>('individual'); // Individual as Prime Driver!
   const [currentCompetition, setCurrentCompetition] = useState<string>('overall');
   const [timeRange, setTimeRange] = useState<string>('all');
@@ -70,13 +72,13 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
   });
 
   const levels = [
-    { id: 'individual', label: '👤 Individuals (Prime Driver)', subtitle: 'Citizen Guardians, Farmers & Students' },
-    { id: 'school', label: '🏫 Schools / Institutions', subtitle: 'Green School & Campus Stewardship' },
-    { id: 'ngo', label: '🤝 NGOs & Foundations', subtitle: 'Ecological Restoration Non-Profits & CSR' },
-    { id: 'city', label: '🏙️ Cities', subtitle: 'Municipalities & Metros' },
-    { id: 'district', label: '📍 Districts', subtitle: 'Administrative Districts' },
-    { id: 'state', label: '🗺️ States', subtitle: 'State Forest & Green Covers' },
-    { id: 'national', label: '🇮🇳 India (National)', subtitle: 'National Benchmark' },
+    { id: 'individual', label: t('levelIndividual'), subtitle: t('levelIndividualSub') },
+    { id: 'school', label: t('levelSchool'), subtitle: t('levelSchoolSub') },
+    { id: 'ngo', label: t('levelNGO'), subtitle: t('levelNGOSub') },
+    { id: 'city', label: t('levelCity'), subtitle: t('levelCitySub') },
+    { id: 'district', label: t('levelDistrict'), subtitle: t('levelDistrictSub') },
+    { id: 'state', label: t('levelState'), subtitle: t('levelStateSub') },
+    { id: 'national', label: t('levelNational'), subtitle: t('levelNationalSub') },
   ];
 
   const competitions = [
@@ -96,16 +98,16 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
           <div>
             <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1.5">
               <Trophy className="w-4 h-4" />
-              <span>TreeView Index™ Leadership System</span>
+              <span>{t('leaderboardSubtitle')}</span>
               <span className="px-2 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-400/30 rounded-md text-[10px] font-bold">
-                DEMO BENCHMARK DATA
+                {t('benchmarkBadge')}
               </span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
-              Green Leaders
+              {t('leaderboardTitle')}
             </h1>
             <p className="text-xs sm:text-sm text-stone-300 mt-1 max-w-2xl leading-relaxed">
-              <strong>Every tree counts, Verified Live.</strong> Rankings are based on verified survival, tree health, consistent monitoring and stewardship — not raw planting numbers alone. Individuals are the prime drivers of our living canopy.
+              <strong>{t('tagline')}.</strong> Rankings are based on verified survival, tree health, consistent monitoring and stewardship — not raw planting numbers alone. Individuals are the prime drivers of our living canopy.
             </p>
 
             <div className="mt-4 flex flex-wrap items-center gap-3 text-xs">

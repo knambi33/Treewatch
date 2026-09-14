@@ -1,5 +1,6 @@
 import React from 'react';
 import { Home, Trees, PlusCircle, MapPin, Layers, Camera } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface MobileNavProps {
   currentTab: string;
@@ -14,6 +15,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({
   onPlantTreeClick,
   onScanQRClick,
 }) => {
+  const { t } = useLanguage();
+
   return (
     <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-lg border-t border-emerald-900/10 py-2 px-3 flex items-center justify-around shadow-lg">
       <button
@@ -23,7 +26,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
         }`}
       >
         <Home className={`w-5 h-5 ${currentTab === 'home' ? 'stroke-[2.5]' : ''}`} />
-        <span>Home</span>
+        <span>{t('navHome')}</span>
       </button>
 
       <button
@@ -33,7 +36,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
         }`}
       >
         <Trees className={`w-5 h-5 ${currentTab === 'trees' ? 'stroke-[2.5]' : ''}`} />
-        <span>Trees</span>
+        <span>{t('navTrees')}</span>
       </button>
 
       {/* Center Primary Action: Plant / Register Tree */}
@@ -44,7 +47,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
         <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-600 to-green-500 text-white flex items-center justify-center shadow-lg shadow-emerald-600/30 group-hover:scale-105 transition-all">
           <PlusCircle className="w-6 h-6 stroke-[2.5]" />
         </div>
-        <span className="text-[10px] font-bold text-emerald-800 mt-0.5">+ Plant</span>
+        <span className="text-[10px] font-bold text-emerald-800 mt-0.5">+ {t('btnPlantTree')}</span>
       </button>
 
       <button
@@ -54,7 +57,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
         }`}
       >
         <MapPin className={`w-5 h-5 ${currentTab === 'map' ? 'stroke-[2.5]' : ''}`} />
-        <span>Map</span>
+        <span>{t('navMap')}</span>
       </button>
 
       <button
@@ -63,7 +66,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
         title="Open Camera to photograph and verify trees"
       >
         <Camera className="w-5 h-5 text-emerald-700" />
-        <span>Camera</span>
+        <span>{t('btnVerifyTree')}</span>
       </button>
     </div>
   );
