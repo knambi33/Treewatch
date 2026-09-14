@@ -64,7 +64,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
       });
 
       if (res.success && res.user) {
-        setSuccessMessage(`Welcome to TreeWatch, ${res.user.name}!`);
+        setSuccessMessage(`Welcome to TreeView, ${res.user.name}!`);
         switchUser(res.user);
         setTimeout(() => {
           onSuccess();
@@ -133,10 +133,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         <div className="mb-4">
           <div className="flex items-center gap-2 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-1">
             <Sparkles className="w-4 h-4 text-emerald-600" />
-            <span>TreeWatch Onboarding Desk</span>
+            <span>TreeView Onboarding Desk</span>
           </div>
           <h2 className="text-xl font-extrabold text-stone-900 leading-tight">
-            Join the TreeWatch Network
+            Join the TreeView Network
           </h2>
           <p className="text-xs text-stone-500 mt-0.5">
             Register as an individual planter or onboard your NGO, School, or CSR programme

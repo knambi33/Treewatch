@@ -5,8 +5,8 @@ import { CareActivity } from '../types.js';
 
 export const scoreRouter = Router();
 
-// GET /api/trees/:treeId/score - Single tree score & breakdown (Section 48)
-scoreRouter.get('/trees/:treeId/score', (req, res) => {
+// Handler for TreeView Index (single tree score & breakdown)
+const getTreeScoreHandler = (req: any, res: any) => {
   const tree = store.getTreeById(req.params.treeId);
   if (!tree) {
     return res.status(404).json({ success: false, message: 'Tree not found' });
@@ -47,7 +47,11 @@ scoreRouter.get('/trees/:treeId/score', (req, res) => {
     history,
     careActivities,
   });
-});
+};
+
+// GET /api/trees/:treeId/score & GET /api/treeview-index/:treeId (Section 48)
+scoreRouter.get('/trees/:treeId/score', getTreeScoreHandler);
+scoreRouter.get('/treeview-index/:treeId', getTreeScoreHandler);
 
 // POST /api/trees/:treeId/care - Log a care & maintenance event
 scoreRouter.post('/trees/:treeId/care', (req, res) => {
@@ -68,7 +72,7 @@ scoreRouter.post('/trees/:treeId/care', (req, res) => {
     date: new Date().toISOString().split('T')[0],
     recordedByUserId: recordedByUserId || tree.caretakerId || 'USR-PLANTER-01',
     recordedByUserName: recordedByUserName || tree.caretakerName || 'Guardian',
-    notes: notes || 'Routine care recorded in TreeWatch app',
+    notes: notes || 'Routine care recorded in TreeView app',
     photoUrl,
   };
 
@@ -118,8 +122,8 @@ scoreRouter.get('/guardians/:id/score', (req, res) => {
   });
 });
 
-// GET /api/geo/leaderboard - Filterable Geographic Leaderboard (Section 25, 29, 30, 31)
-scoreRouter.get('/geo/leaderboard', (req, res) => {
+// Handler for Filterable Geographic Leaderboard (Section 25, 29, 30, 31)
+const getLeaderboardHandler = (req: any, res: any) => {
   const level = (req.query.level as any) || 'city';
   const competition = (req.query.competition as string) || 'overall';
   const timeRange = (req.query.timeRange as string) || 'all';
@@ -159,7 +163,11 @@ scoreRouter.get('/geo/leaderboard', (req, res) => {
     updatedAt: new Date().toISOString(),
     leaderboard: list,
   });
-});
+};
+
+// GET /api/geo/leaderboard & GET /api/treeview-leaders
+scoreRouter.get('/geo/leaderboard', getLeaderboardHandler);
+scoreRouter.get('/treeview-leaders', getLeaderboardHandler);
 
 // GET /api/geo/:level/:geoId/score - Specific GeoScore (Section 50)
 scoreRouter.get('/geo/:level/:geoId/score', (req, res) => {
@@ -194,7 +202,7 @@ scoreRouter.put('/admin/scoring-config', (req, res) => {
 
   res.json({
     success: true,
-    message: 'Scoring parameters updated and all TreeScores recomputed',
+    message: 'Scoring parameters updated and all TreeView Indices recomputed',
     config: updated,
   });
 });

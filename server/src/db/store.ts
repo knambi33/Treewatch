@@ -589,7 +589,7 @@ class DataStore {
         data.baselinePhotoUrl ||
         'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80',
       qrCodeUrl: `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${treeCode}`,
-      notes: data.notes || 'Registered in TreeWatch field app.',
+      notes: data.notes || 'Registered in TreeView field app.',
       ageMonths: 0,
       checkInCount: 0,
       studentClass: data.studentClass,
@@ -708,7 +708,7 @@ class DataStore {
         timestamp: verification.submittedAt,
         eventType: 'AI Verification',
         title: `📷 Monthly Verification — ${newStatus} (Score: ${newScore.totalScore})`,
-        description: `GPS: ${verification.gpsStatus} (${verification.gpsDistanceMeters}m). Health: ${newHealth}. TreeScore: ${newScore.totalScore}/100 (${newScore.category}). ${newScore.isEstablished ? '🏆 TreeWatch Established™ Achieved!' : ''}`,
+        description: `GPS: ${verification.gpsStatus} (${verification.gpsDistanceMeters}m). Health: ${newHealth}. TreeView Index: ${newScore.totalScore}/100 (${newScore.category}). ${newScore.isEstablished ? '🏆 TreeView Established™ Achieved!' : ''}`,
         photoUrl: newPhoto.photoUrl,
         badge: newStatus,
         actorName: verification.submittedByUserName,

@@ -107,10 +107,10 @@ export const TreeScoreBreakdownCard: React.FC<TreeScoreBreakdownCardProps> = ({
         <div>
           <h3 className="text-base font-extrabold text-stone-900 flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-emerald-600" />
-            <span>TreeWatch Score™ Breakdown</span>
+            <span>TreeView Index™ Breakdown</span>
           </h3>
           <p className="text-xs text-stone-500">
-            Transparent, auditable 6-component scoring model (TreeScore v1.0)
+            Transparent, auditable 6-component scoring model (TreeView Index v1.0)
           </p>
         </div>
 
@@ -209,9 +209,9 @@ export const TreeScoreBreakdownCard: React.FC<TreeScoreBreakdownCardProps> = ({
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
               <div>
                 <h3 className="text-lg font-extrabold text-stone-900">
-                  How TreeWatch Score™ Works
+                  How TreeView Index™ Works
                 </h3>
-                <p className="text-xs text-stone-500">Methodology Version: TreeScore v1.0</p>
+                <p className="text-xs text-stone-500">Methodology Version: TreeView Index v1.0</p>
               </div>
               <button
                 onClick={() => setShowExplainer(false)}
@@ -248,7 +248,7 @@ export const TreeScoreBreakdownCard: React.FC<TreeScoreBreakdownCardProps> = ({
                 <p>
                   <strong>Honest Reporting Guarantee:</strong> Overdue check-ins are marked <em>Verification Pending</em>,
                   never assumed dead. If a tree dies, future survival points stop accruing, but its verified lifetime
-                  TreeScore and photo history are permanently preserved.
+                  TreeView Index and photo history are permanently preserved.
                 </p>
               </div>
             </div>

@@ -6,12 +6,16 @@ interface TreeLifecycleVisualizerProps {
   score: number;
   category: TreeScoreCategory;
   isEstablished?: boolean;
+  ageMonths?: number;
+  validChecksCount?: number;
 }
 
 export const TreeLifecycleVisualizer: React.FC<TreeLifecycleVisualizerProps> = ({
   score,
   category,
   isEstablished = false,
+  ageMonths,
+  validChecksCount,
 }) => {
   const stages = [
     { id: 'planted', label: '🌱 Planted', minScore: 0 },
@@ -19,7 +23,7 @@ export const TreeLifecycleVisualizer: React.FC<TreeLifecycleVisualizerProps> = (
     { id: 'surviving', label: '🌳 Surviving', minScore: 40 },
     { id: 'thriving', label: '🌳 Thriving', minScore: 60 },
     { id: 'established', label: '🌳 Established', minScore: 80 },
-    { id: 'champion', label: '🏆 TreeWatch Established™', isMilestone: true },
+    { id: 'champion', label: '🏆 TreeView Established™', isMilestone: true },
   ];
 
   const getStageStatus = (stage: typeof stages[0]) => {
@@ -42,7 +46,7 @@ export const TreeLifecycleVisualizer: React.FC<TreeLifecycleVisualizerProps> = (
       <div className="flex items-center justify-between">
         <div>
           <h4 className="text-sm font-extrabold text-stone-900 flex items-center gap-2">
-            <span>Verified Lifecycle Progression</span>
+            <span>TreeView Life — Lifecycle Progression</span>
           </h4>
           <p className="text-xs text-stone-500">
             Progressive establishment from initial seedling planting to multi-year maturity

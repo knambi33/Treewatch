@@ -67,7 +67,7 @@ export const PublicTransparency: React.FC = () => {
           </div>
         </div>
 
-        {/* Public Survival & TreeScore Metrics Grid (Section 51) */}
+        {/* Public Survival & TreeView Index Metrics Grid (Section 51) */}
         <div className="grid grid-cols-2 sm:grid-cols-6 gap-2.5 mt-6 pt-5 border-t border-white/10 text-xs text-center">
           <div className="bg-white/5 p-3 rounded-2xl border border-white/10">
             <span className="text-stone-400 font-bold text-[10px] uppercase block">Survival Rate</span>
@@ -102,7 +102,7 @@ export const PublicTransparency: React.FC = () => {
           </div>
 
           <div className="bg-white/5 p-3 rounded-2xl border border-white/10">
-            <span className="text-stone-400 font-bold text-[10px] uppercase block">Avg TreeScore™</span>
+            <span className="text-stone-400 font-bold text-[10px] uppercase block">Avg TreeView Index™</span>
             <span className="text-lg font-extrabold text-emerald-400">
               81.4
             </span>
@@ -123,7 +123,7 @@ export const PublicTransparency: React.FC = () => {
       <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-3xl text-xs text-emerald-950 space-y-1">
         <h4 className="font-extrabold flex items-center gap-1.5 text-emerald-900">
           <ShieldCheck className="w-4 h-4 text-emerald-700" />
-          <span>TreeWatch Transparency Guarantee • Every Tree Counts</span>
+          <span>TreeView Transparency Guarantee • Every tree counts, Verified Live</span>
         </h4>
         <p className="leading-relaxed">
           {data?.governanceStatement ||

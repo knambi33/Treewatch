@@ -1,5 +1,5 @@
-// TreeWatch PWA Service Worker — Version 1.0.0
-const CACHE_NAME = 'treewatch-pwa-v1';
+// TreeView PWA Service Worker — Version 1.0.0
+const CACHE_NAME = 'treeview-pwa-v1';
 
 const PRECACHE_ASSETS = [
   '/',
@@ -15,9 +15,9 @@ const PRECACHE_ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[TreeWatch SW] Precaching application shell');
+      console.log('[TreeView SW] Precaching application shell');
       return cache.addAll(PRECACHE_ASSETS).catch((err) => {
-        console.warn('[TreeWatch SW] Precache partial error (ignored):', err);
+        console.warn('[TreeView SW] Precache partial error (ignored):', err);
       });
     })
   );
@@ -31,7 +31,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log('[TreeWatch SW] Clearing legacy cache:', key);
+            console.log('[TreeView SW] Clearing legacy cache:', key);
             return caches.delete(key);
           }
         })

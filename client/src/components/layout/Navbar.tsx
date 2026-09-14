@@ -77,14 +77,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-base tracking-tight text-emerald-950 font-sans">
-                  Tree<span className="text-emerald-600">Watch</span>
+                  Tree<span className="text-emerald-600">View</span>
                 </span>
                 <span className="text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 font-bold rounded-md">
                   v1.0
                 </span>
               </div>
               <p className="hidden md:block text-[10.5px] text-stone-600 font-medium leading-none mt-0.5">
-                Every Tree Counts. Keep It Alive.
+                Every tree counts, Verified Live
               </p>
             </div>
           </button>
@@ -118,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Rural Offline Mode Toggle */}
           <button
             onClick={() => setIsOffline(!isOffline)}
-            title={isOffline ? 'You are offline (queuing local records)' : 'Online: Connected to TreeWatch cloud'}
+            title={isOffline ? 'You are offline (queuing local records)' : 'Online: Connected to TreeView cloud'}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
               isOffline
                 ? 'bg-amber-100 text-amber-900 border-amber-300 animate-pulse'
@@ -193,10 +193,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onOpenQRScanner}
             className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-950 border border-emerald-300/70 rounded-xl text-xs font-bold shadow-2xs transition-all"
-            title="Open camera to photograph, verify, or scan tree QR code"
+            title="Open camera to photograph, verify, or scan tree in TreeView"
           >
             <Camera className="w-3.5 h-3.5 text-emerald-700" />
-            <span className="hidden sm:inline">Camera Verify</span>
+            <span className="hidden sm:inline">TreeView Verify</span>
           </button>
 
           {/* Quick Register User / NGO Button */}
@@ -214,10 +214,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenAdminConfig}
               className="flex items-center gap-1.5 px-2.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 rounded-xl text-xs font-semibold shadow-2xs transition-all"
-              title="TreeScore Engine Config & Threshold Tuning"
+              title="TreeView Index Engine Config & Threshold Tuning"
             >
               <Sliders className="w-3.5 h-3.5 text-stone-600" />
-              <span className="hidden xl:inline">Scoring Rules</span>
+              <span className="hidden xl:inline">TreeView Index Rules</span>
             </button>
           )}
 
@@ -226,7 +226,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenInstallPWA}
               className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 text-white rounded-xl text-xs font-bold shadow-xs hover:scale-105 transition-all"
-              title="Install TreeWatch PWA Mobile App to your device"
+              title="Install TreeView PWA Mobile App to your device"
             >
               <Download className="w-3.5 h-3.5 animate-pulse" />
               <span className="hidden lg:inline">Install App</span>
@@ -344,7 +344,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🗺️ Interactive Map
+            🗺️ TreeView Map
           </button>
           <button
             onClick={() => setCurrentTab('projects')}
@@ -364,7 +364,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🏢 CSR Impact Dashboard
+            🏢 TreeView Impact
           </button>
           <button
             onClick={() => setCurrentTab('ngo')}
@@ -374,7 +374,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🤝 NGO Hub & Bulk Import
+            🤝 TreeView NGO Hub
           </button>
           <button
             onClick={() => setCurrentTab('school')}
@@ -384,7 +384,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🏫 School Green Campus
+            🏫 TreeView Green Campus
           </button>
           <button
             onClick={() => setCurrentTab('review')}
@@ -394,7 +394,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            🔍 Review Queue
+            🔍 TreeView Review Queue
           </button>
           <button
             onClick={() => setCurrentTab('analytics')}
@@ -404,7 +404,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            📈 Survival Metrics
+            📈 TreeView Survival Analytics
           </button>
           <button
             onClick={() => setCurrentTab('public')}
@@ -424,7 +424,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 : 'text-stone-600 hover:text-stone-900 hover:bg-stone-100'
             }`}
           >
-            <span>📖 TreeScore Methodology</span>
+            <span>📖 TreeView Index Methodology</span>
           </button>
           <button
             onClick={() => setCurrentTab('reports')}

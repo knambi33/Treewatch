@@ -88,7 +88,7 @@ export const TreeMapView: React.FC<TreeMapViewProps> = ({
       });
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors | TreeWatch Geotag Registry',
+        attribution: '&copy; OpenStreetMap contributors | TreeView Geotag Registry',
         maxZoom: 19,
       }).addTo(map);
 

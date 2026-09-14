@@ -48,14 +48,14 @@ export const InstallPWAModal: React.FC<InstallPWAModalProps> = ({
       deferredPrompt.prompt();
       const choiceResult = await deferredPrompt.userChoice;
       if (choiceResult.outcome === 'accepted') {
-        console.log('[TreeWatch PWA] User accepted the install prompt');
+        console.log('[TreeView PWA] User accepted the install prompt');
         if (onInstallAccepted) onInstallAccepted();
         onClose();
       } else {
-        console.log('[TreeWatch PWA] User dismissed the install prompt');
+        console.log('[TreeView PWA] User dismissed the install prompt');
       }
     } catch (err) {
-      console.error('[TreeWatch PWA] Install error:', err);
+      console.error('[TreeView PWA] Install error:', err);
     } finally {
       setInstalling(false);
     }
@@ -75,12 +75,12 @@ export const InstallPWAModal: React.FC<InstallPWAModalProps> = ({
         <div className="flex items-center gap-3.5 mb-5">
           <img
             src="/pwa-icon.svg"
-            alt="TreeWatch App Icon"
+            alt="TreeView App Icon"
             className="w-14 h-14 rounded-2xl shadow-md shadow-emerald-900/20 border border-emerald-500/30"
           />
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-lg text-emerald-950">TreeWatch</span>
+              <span className="font-extrabold text-lg text-emerald-950">TreeView</span>
               <span className="text-[10px] px-1.5 py-0.2 bg-emerald-100 text-emerald-800 font-bold rounded-md">
                 PWA Mobile
               </span>
@@ -130,7 +130,7 @@ export const InstallPWAModal: React.FC<InstallPWAModalProps> = ({
             <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto" />
             <p className="text-sm font-bold text-emerald-950">App Already Installed!</p>
             <p className="text-xs text-emerald-800">
-              You are running the full TreeWatch Progressive Web App on your device.
+              You are running the full TreeView Progressive Web App on your device.
             </p>
           </div>
         ) : isIOS ? (
@@ -178,7 +178,7 @@ export const InstallPWAModal: React.FC<InstallPWAModalProps> = ({
             className="w-full py-3 bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-700 hover:to-green-800 text-white text-sm font-extrabold rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-700/25 transition-all"
           >
             <Download className={`w-4 h-4 ${installing ? 'animate-bounce' : ''}`} />
-            <span>{installing ? 'Opening App Installer...' : 'Install TreeWatch App'}</span>
+            <span>{installing ? 'Opening App Installer...' : 'Install TreeView App'}</span>
           </button>
         ) : (
           /* Fallback for Desktop or unsupported prompt */
@@ -187,7 +187,7 @@ export const InstallPWAModal: React.FC<InstallPWAModalProps> = ({
               Install via your browser's address bar icon:
             </p>
             <p className="text-[11px]">
-              Look for the <strong>Install</strong> or <strong>[+]</strong> icon in your URL bar, or click your browser menu &rarr; <em>"Install TreeWatch"</em>.
+              Look for the <strong>Install</strong> or <strong>[+]</strong> icon in your URL bar, or click your browser menu &rarr; <em>"Install TreeView"</em>.
             </p>
           </div>
         )}

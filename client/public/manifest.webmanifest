@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "TreeWatch — Tree Planting & Survival Tracker",
-  "short_name": "TreeWatch",
-  "description": "Every Tree Counts. Keep It Alive. Real-time geotagging, survival auditing, and TreeScore™ leaderboards.",
-  "id": "in.treewatch.app",
+  "name": "TreeView — Every tree counts, Verified Live",
+  "short_name": "TreeView",
+  "description": "Every tree counts, Verified Live. Real-time geotagging, survival auditing, and TreeView Index™ leaderboards.",
+  "id": "in.treeview.app",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
@@ -75,7 +75,7 @@
     {
       "name": "Green Leaders",
       "short_name": "Leaderboard",
-      "description": "View verified Individual, School, NGO & City TreeScores",
+      "description": "View verified Individual, School, NGO & City TreeView Indices",
       "url": "/?tab=leaderboard",
       "icons": [
         {

@@ -70,12 +70,12 @@ function MainApp() {
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      console.log('[TreeWatch PWA] beforeinstallprompt captured');
+      console.log('[TreeView PWA] beforeinstallprompt captured');
       setDeferredPrompt(e);
     };
 
     const handleAppInstalled = () => {
-      console.log('[TreeWatch PWA] App was successfully installed');
+      console.log('[TreeView PWA] App was successfully installed');
       setIsPWAInstalled(true);
       setDeferredPrompt(null);
     };
@@ -182,7 +182,7 @@ function MainApp() {
             <div className="py-24 text-center space-y-3">
               <div className="w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto" />
               <p className="text-xs font-bold text-stone-600">
-                Loading TreeWatch Geotag Registry...
+                Loading TreeView Geotag Registry...
               </p>
             </div>
           ) : (

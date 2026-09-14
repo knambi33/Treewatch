@@ -59,7 +59,7 @@ organisationsRouter.post('/register', (req, res) => {
     contactEmail: contactEmail || 'contact@' + slug + '.org',
     contactPhone: contactPhone || '+91 90000 00000',
     publicSlug: slug,
-    description: description || 'Registered afforestation partner on TreeWatch.',
+    description: description || 'Registered afforestation partner on TreeView.',
     location: location || 'India',
   };
 

@@ -35,10 +35,10 @@ export const MethodologyPage: React.FC<MethodologyPageProps> = ({
           <span>Scientific Governance & Audit Standards • Version 1.0</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-          How TreeWatch Score™ Works
+          How TreeView Index™ Works
         </h1>
         <p className="text-xs sm:text-sm text-emerald-100/90 mt-2 max-w-2xl leading-relaxed">
-          The proprietary 0–100 verification standard measuring the journey of every tree from seedling
+          Every tree counts, Verified Live. The proprietary 0–100 verification standard measuring the journey of every tree from seedling
           to multi-year established canopy.
         </p>
 
@@ -58,12 +58,12 @@ export const MethodologyPage: React.FC<MethodologyPageProps> = ({
           <span className="w-7 h-7 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-black">
             1
           </span>
-          <span>Why TreeWatch Score™ Exists</span>
+          <span>Why TreeView Index™ Exists</span>
         </h2>
         <p className="text-xs leading-relaxed text-stone-600">
           Traditional afforestation programs focus almost entirely on the initial planting event. Millions of
           seedlings are announced on paper, yet over 70% perish within the first year due to lack of aftercare,
-          water scarcity, or false reporting. TreeWatch Score™ changes the incentives by treating planting as
+          water scarcity, or false reporting. TreeView Index™ changes the incentives by treating planting as
           only the first step (10 points). True leadership is earned through verified survival, health, and
           multi-year stewardship.
         </p>
@@ -217,16 +217,16 @@ export const MethodologyPage: React.FC<MethodologyPageProps> = ({
         </div>
       </section>
 
-      {/* 4. TreeWatch Established Milestone */}
+      {/* 4. TreeView Established Milestone */}
       <section className="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-md border border-stone-200/80 space-y-3">
         <h2 className="text-xl font-extrabold text-stone-900 flex items-center gap-2">
           <span className="w-7 h-7 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-black">
             4
           </span>
-          <span>TreeWatch Established™ Milestone Criteria</span>
+          <span>TreeView Established™ Milestone Criteria</span>
         </h2>
         <p className="text-xs text-stone-600 leading-relaxed">
-          A tree is officially designated as <strong>TreeWatch Established™</strong> only when all seven criteria
+          A tree is officially designated as <strong>TreeView Established™</strong> only when all seven criteria
           are simultaneously fulfilled:
         </p>
 
@@ -254,14 +254,14 @@ export const MethodologyPage: React.FC<MethodologyPageProps> = ({
             Critical Rule: Overdue Check-in &ne; Dead. No Photo &ne; Dead.
           </p>
           <p>
-            If a check-in is overdue, the tree enters <strong>Verification Pending</strong>. TreeWatch never
+            If a check-in is overdue, the tree enters <strong>Verification Pending</strong>. TreeView never
             automatically marks a tree dead simply because an audit is delayed.
           </p>
           <p>
             When a tree genuinely perishes, caretakers are actively rewarded for transparency with{' '}
             <strong>+2 Honest Reporting Integrity Points</strong> on their GuardianScore. The tree's historical
             lifetime score and survival days are permanently locked and displayed (e.g.{' '}
-            <em>"Lifetime TreeScore: 47 — Verified alive for 14 months"</em>). TreeWatch never erases historical
+            <em>"Lifetime TreeView Index: 47 — Verified alive for 14 months"</em>). TreeView never erases historical
             records or penalizes caretakers for honest mortality reporting.
           </p>
         </div>
@@ -351,7 +351,7 @@ export const MethodologyPage: React.FC<MethodologyPageProps> = ({
             onClick={onExploreLeaderboard}
             className="px-5 py-2.5 text-xs font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-sm transition-all flex items-center gap-1.5"
           >
-            <span>Explore TreeWatch Leaderboards</span>
+            <span>Explore TreeView Green Leaders</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         )}

@@ -4,7 +4,7 @@ import { store } from '../db/store.js';
 import { Tree, Verification, CareActivity } from '../types.js';
 
 console.log('🌲 ========================================');
-console.log('   TreeWatch TreeScore™ Test Suite (Section 66)');
+console.log('   TreeView Index™ Test Suite (Section 66)');
 console.log('========================================\n');
 
 let passedTests = 0;
@@ -144,7 +144,7 @@ function assert(description: string, condition: boolean, extraInfo?: string) {
 }
 
 // TEST 3: Tree survives 36 months and meets establishment criteria
-// Expected: TreeWatch Established™
+// Expected: TreeView Established™
 {
   const tree36m: Tree = {
     id: 'TEST-TREE-36M',
@@ -214,7 +214,7 @@ function assert(description: string, condition: boolean, extraInfo?: string) {
 
   const score = treeScoreService.calculateTreeScore(tree36m, verifs, []);
   assert(
-    'Test 3: 36-month surviving tree meets establishment criteria (TreeWatch Established™)',
+    'Test 3: 36-month surviving tree meets establishment criteria (TreeView Established™)',
     score.isEstablished === true && score.totalScore >= 80,
     `isEstablished: ${score.isEstablished}, score: ${score.totalScore}`
   );
@@ -530,6 +530,6 @@ console.log('========================================');
 if (failedTests > 0) {
   process.exit(1);
 } else {
-  console.log('🎉 ALL 10 TREEWATCH TREESCORE™ SPECIFICATION TESTS PASSED!');
+  console.log('🎉 ALL 10 TREEVIEW INDEX™ SPECIFICATION TESTS PASSED!');
   process.exit(0);
 }

@@ -55,7 +55,7 @@ app.use('/api', scoreRouter);
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    service: 'TreeWatch Backend API',
+    service: 'TreeView Backend API',
     version: '1.0.0',
     timestamp: new Date().toISOString(),
   });
@@ -75,6 +75,6 @@ if (fs.existsSync(clientDist)) {
 }
 
 app.listen(PORT, () => {
-  console.log(`🌲 TreeWatch Backend API listening on http://localhost:${PORT}`);
-  console.log(`🌱 Tagline: Every Tree Counts. Keep It Alive.`);
+  console.log(`🌲 TreeView Backend API listening on http://localhost:${PORT}`);
+  console.log(`🌱 Tagline: Every tree counts, Verified Live`);
 });

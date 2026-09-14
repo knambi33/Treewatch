@@ -290,7 +290,7 @@ export class TreeScoreService {
   }
 
   /**
-   * TreeWatch Established™ Milestone Evaluation
+   * TreeView Established™ Milestone Evaluation
    * Section 16
    */
   public evaluateEstablished(
@@ -327,7 +327,7 @@ export class TreeScoreService {
    * Section 15
    */
   public resolveCategory(score: number): TreeScoreCategory {
-    if (score >= 95) return '🏆 TreeWatch Champion';
+    if (score >= 95) return '🏆 TreeView Champion';
     if (score >= 80) return '🌳 Established';
     if (score >= 60) return '🌳 Thriving';
     if (score >= 40) return '🌳 Surviving';
@@ -341,7 +341,7 @@ export class TreeScoreService {
    */
   public generateImprovementTip(components: TreeScoreComponents, isDead: boolean): string {
     if (isDead) {
-      return 'Tree verified as dead. Lifetime TreeScore and verification history are permanently preserved.';
+      return 'Tree verified as dead. Lifetime TreeView Index and verification history are permanently preserved.';
     }
 
     if (components.monitoring_score < 10) {
@@ -359,7 +359,7 @@ export class TreeScoreService {
     if (components.survival_score < 20) {
       return 'Maintain current health and check-in habits to unlock higher multi-year survival milestone tiers.';
     }
-    return 'Outstanding stewardship! Keep up consistent monthly verifications towards TreeWatch Champion status.';
+    return 'Outstanding stewardship! Keep up consistent monthly verifications towards TreeView Champion status.';
   }
 
   /**

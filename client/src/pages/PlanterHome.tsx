@@ -81,7 +81,7 @@ export const PlanterHome: React.FC<PlanterHomeProps> = ({
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-fadeIn pb-12">
-      {/* Hero Welcome Card (Section 36) */}
+      {/* Hero Welcome Card */}
       <div className="bg-gradient-to-br from-emerald-800 via-emerald-700 to-green-800 text-white rounded-3xl p-6 sm:p-7 shadow-lg shadow-emerald-900/15 relative overflow-hidden">
         {/* Subtle decorative leaf pattern in background */}
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
@@ -95,18 +95,33 @@ export const PlanterHome: React.FC<PlanterHomeProps> = ({
                 DEMO BENCHMARK DATA
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-              Don't Just Plant Trees. Keep Them Alive.
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase">
+              Every tree counts, Verified Live
             </h1>
-            <p className="text-xs text-emerald-100/90 mt-1 max-w-md leading-relaxed">
-              Every Tree Counts. Every Month Matters. Powered by <strong>TreeWatch Score™</strong> GPS & photographic audit.
+            <p className="text-xs text-emerald-100/90 mt-1 max-w-lg leading-relaxed">
+              <strong>Planting is Day One. Survival is the Impact.</strong> Powered by <strong>TreeView Index™</strong> GPS & photographic audit.
             </p>
+
+            {/* Visual Lifecycle Journey: PLANT -> IDENTIFY -> VERIFY -> CARE -> SURVIVE -> ESTABLISH */}
+            <div className="flex flex-wrap items-center gap-1.5 mt-3 text-[10px] font-black uppercase tracking-wider text-emerald-200/90">
+              <span className="px-1.5 py-0.5 bg-emerald-900/40 rounded border border-emerald-400/20">Plant</span>
+              <span>&rarr;</span>
+              <span className="px-1.5 py-0.5 bg-emerald-900/40 rounded border border-emerald-400/20">Identify</span>
+              <span>&rarr;</span>
+              <span className="px-1.5 py-0.5 bg-emerald-900/40 rounded border border-emerald-400/20">Verify</span>
+              <span>&rarr;</span>
+              <span className="px-1.5 py-0.5 bg-emerald-900/40 rounded border border-emerald-400/20">Care</span>
+              <span>&rarr;</span>
+              <span className="px-1.5 py-0.5 bg-emerald-900/40 rounded border border-emerald-400/20">Survive</span>
+              <span>&rarr;</span>
+              <span className="px-1.5 py-0.5 bg-emerald-900/40 rounded border border-emerald-400/20 text-emerald-300 font-extrabold">Establish</span>
+            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             {guardianScore && (
-              <div className="bg-white/10 backdrop-blur-xs p-3 rounded-2xl border border-white/20 text-center min-w-[130px]">
-                <span className="text-[10px] uppercase font-bold text-emerald-200 block">GuardianScore™</span>
+              <div className="bg-white/10 backdrop-blur-xs p-3 rounded-2xl border border-white/20 text-center min-w-[140px]">
+                <span className="text-[10px] uppercase font-bold text-emerald-200 block">TreeView Guardian Score</span>
                 <span className="text-2xl font-black text-white">{guardianScore.totalGuardianScore.toFixed(1)}</span>
                 <span className="text-[10px] text-emerald-300 block font-bold mt-0.5">{guardianScore.badge}</span>
               </div>
@@ -116,10 +131,10 @@ export const PlanterHome: React.FC<PlanterHomeProps> = ({
               <button
                 onClick={onScanQRClick}
                 className="px-3.5 py-2.5 bg-emerald-500/90 hover:bg-emerald-500 text-white text-xs font-extrabold rounded-2xl shadow-md hover:scale-102 transition-all flex items-center gap-1.5 border border-emerald-300/30"
-                title="Open camera to photograph and verify trees"
+                title="Open camera to photograph and verify trees in TreeView"
               >
                 <Camera className="w-4 h-4" />
-                <span>Camera Verify</span>
+                <span>TreeView Verify</span>
               </button>
               <button
                 onClick={onPlantTreeClick}

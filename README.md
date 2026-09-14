@@ -1,12 +1,12 @@
-# TreeWatch — Tree Planting & Survival Tracker
-> **Every Tree Counts. Keep It Alive.**  
-> *"Do not count trees planted. Count trees that survive."*
+# TreeView — Tree Planting & Survival Tracker
+> **Every tree counts, Verified Live**  
+> *"Planting is Day One. Survival is the Impact."*
 
 ---
 
 ## 🌲 Overview
 
-**TreeWatch** is a mobile-first digital platform for **CSR organizations, NGOs, schools, colleges, resident communities, municipalities, corporates, and individual tree planters** to track the complete multi-year lifecycle of every planted tree.
+**TreeView** is a mobile-first digital platform for **CSR organizations, NGOs, schools, colleges, resident communities, municipalities, corporates, and individual tree planters** to track the complete multi-year lifecycle of every planted tree.
 
 Every planted tree receives:
 * A permanent structured **Tree ID** and printable **QR Identity Tag**.
@@ -120,7 +120,7 @@ If you prefer deploying the frontend on **Vercel** and the backend on **Render**
 
 ## 🔒 Multi-Tenant Data Privacy & Role-Based Access
 
-TreeWatch provides enterprise multi-tenancy:
+TreeView provides enterprise multi-tenancy:
 * **NGOs & Field Leads**: Autonomous control over assigned concessions, volunteer rosters, and batch uploads. Private CSR budgets and other entities' sensitive operational data are protected.
 * **Corporate CSR**: Comprehensive ESG compliance dashboards, Survival Methodology A vs B toggle, and downloadable formal audit certificates.
 * **School Campuses**: Youth green adoption programs with Class-level badge milestones and anonymized student rosters.
@@ -130,4 +130,4 @@ TreeWatch provides enterprise multi-tenancy:
 ---
 
 ## 📄 License
-ISC License © TreeWatch — Every Tree Counts. Keep It Alive.
+ISC License © TreeView — Every tree counts, Verified Live

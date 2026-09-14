@@ -154,13 +154,13 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
         </div>
       </div>
 
-      {/* Main Profile Header Card with TreeWatch Score™ */}
+      {/* Main Profile Header Card with TreeView Index™ */}
       <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 shadow-md border border-stone-200/80 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="space-y-1.5">
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-sm font-extrabold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-lg">
-                {tree.treeCode}
+                TreeView ID: {tree.treeCode}
               </span>
               <StatusBadge status={tree.status} size="sm" />
               <EvidenceBadge quality={tree.evidenceQuality} />
@@ -184,7 +184,7 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
               </span>
             </h1>
             <p className="text-xs text-stone-500 italic">
-              Scientific Name: {tree.scientificName}
+              Scientific Name: {tree.scientificName} &bull; <span className="text-emerald-700 font-semibold not-italic">Every tree counts, Verified Live</span>
             </p>
 
             <div className="pt-1 text-xs text-stone-600">
@@ -193,11 +193,11 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
             </div>
           </div>
 
-          {/* Prominent TreeWatch Score Circular Gauge */}
+          {/* Prominent TreeView Index Circular Gauge */}
           {treeScore && (
             <div className="shrink-0 bg-stone-50/80 p-4 rounded-3xl border border-stone-200/80 flex flex-col items-center">
               <span className="text-[10px] font-extrabold text-stone-400 uppercase tracking-widest mb-1.5">
-                TREEWATCH SCORE™
+                TREEVIEW INDEX™
               </span>
               <TreeScoreBadge
                 score={treeScore.score}
@@ -218,37 +218,33 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
             <strong className="text-stone-900 text-sm font-extrabold">
               {tree.ageMonths} months
             </strong>
-            <span className="text-[10px] text-stone-500 block">Planted {tree.plantedDate}</span>
           </div>
 
           <div className="p-3 bg-stone-50 rounded-2xl border border-stone-100">
             <span className="text-stone-400 font-bold text-[10.5px] uppercase block">
-              Last Verified
+              Verified Alive Days
             </span>
-            <strong className="text-emerald-800 text-sm font-extrabold">
-              {tree.lastVerifiedDate || 'Pending'}
+            <strong className="text-emerald-700 text-sm font-extrabold">
+              {treeScore?.verifiedSurvivalDays || tree.ageMonths * 30} days
             </strong>
-            <span className="text-[10px] text-stone-500 block">
-              {tree.checkInCount} check-ins recorded
-            </span>
           </div>
 
           <div className="p-3 bg-stone-50 rounded-2xl border border-stone-100">
             <span className="text-stone-400 font-bold text-[10.5px] uppercase block">
-              GPS Geofence
+              Cumulative TreeYears
             </span>
-            <strong className="text-stone-900 text-sm font-extrabold">Verified ✓</strong>
-            <span className="text-[10px] text-stone-500 block">Accuracy: ±{tree.gpsAccuracyMeters}m</span>
-          </div>
-
-          <div className="p-3 bg-stone-50 rounded-2xl border border-stone-100">
-            <span className="text-stone-400 font-bold text-[10.5px] uppercase block">
-              Assigned Guardian
-            </span>
-            <strong className="text-stone-900 text-sm font-extrabold truncate block">
-              {tree.caretakerName}
+            <strong className="text-stone-900 text-sm font-extrabold">
+              {treeScore?.treeYears || (tree.ageMonths / 12).toFixed(2)} yrs
             </strong>
-            <span className="text-[10px] text-stone-500 block">Category: {tree.landCategory}</span>
+          </div>
+
+          <div className="p-3 bg-stone-50 rounded-2xl border border-stone-100">
+            <span className="text-stone-400 font-bold text-[10.5px] uppercase block">
+              Audit Compliance
+            </span>
+            <strong className="text-stone-900 text-sm font-extrabold">
+              {Math.min(100, Math.round((tree.checkInCount / Math.max(1, tree.ageMonths)) * 100))}%
+            </strong>
           </div>
         </div>
       </div>
@@ -266,23 +262,25 @@ export const TreeDetail: React.FC<TreeDetailProps> = ({
         />
       )}
 
-      {/* Visual Lifecycle Stepper (Section 17) */}
+      {/* Lifecycle Visualizer Stepper */}
       {treeScore && (
         <TreeLifecycleVisualizer
+          ageMonths={tree.ageMonths}
+          validChecksCount={tree.checkInCount}
           score={treeScore.score}
           category={treeScore.category}
           isEstablished={treeScore.established}
         />
       )}
 
-      {/* Score History Progression ("Why did my TreeScore change?" - Section 19) */}
+      {/* Score History Progression ("Why did my TreeView Index change?" - Section 19) */}
       {treeScore?.history && treeScore.history.length > 0 && (
         <div className="bg-white/90 backdrop-blur-md rounded-3xl p-6 shadow-md border border-stone-200/80 space-y-4">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-base font-extrabold text-stone-900 flex items-center gap-2">
                 <History className="w-5 h-5 text-emerald-600" />
-                <span>TreeScore™ Historical Progression</span>
+                <span>TreeView Index™ Historical Progression</span>
               </h3>
               <p className="text-xs text-stone-500">
                 Auditable timeline explaining why your score changed across verification milestones

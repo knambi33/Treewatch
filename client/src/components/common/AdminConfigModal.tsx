@@ -33,7 +33,7 @@ export const AdminConfigModal: React.FC<AdminConfigModalProps> = ({
     try {
       const res = await updateAdminScoringConfig(config);
       if (res.success) {
-        setStatusMsg('Configuration updated and all TreeScores recomputed live!');
+        setStatusMsg('Configuration updated and all TreeView Indices recomputed live!');
         if (onConfigSaved) onConfigSaved();
         setTimeout(() => {
           onClose();
@@ -58,7 +58,7 @@ export const AdminConfigModal: React.FC<AdminConfigModalProps> = ({
             </div>
             <div>
               <h3 className="text-base font-extrabold text-stone-900">
-                TreeScore™ Scoring & Governance Tuning
+                TreeView Index™ Rules & Governance Tuning
               </h3>
               <p className="text-xs text-stone-500">Live configuration thresholds without code redeployment</p>
             </div>
@@ -115,10 +115,10 @@ export const AdminConfigModal: React.FC<AdminConfigModalProps> = ({
               </div>
             </div>
 
-            {/* Group 2: TreeWatch Established Milestone */}
+            {/* Group 2: TreeView Established Milestone */}
             <div className="p-3.5 bg-stone-50 rounded-2xl border border-stone-200/80 space-y-3">
               <h4 className="font-extrabold text-stone-900 text-xs flex items-center gap-1.5">
-                <span>🏆 TreeWatch Established™ Milestone Criteria</span>
+                <span>🏆 TreeView Established™ Milestone Criteria</span>
               </h4>
 
               <div className="grid grid-cols-2 gap-3">

@@ -48,14 +48,13 @@ export const CSRDashboard: React.FC<CSRDashboardProps> = ({ projects, trees, onS
           <div>
             <div className="flex items-center gap-2 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-1">
               <Building2 className="w-4 h-4 text-emerald-400" />
-              <span>Green Earth CSR Foundation • 2026 ESG Programme</span>
+              <span>TreeView Impact • Corporate ESG Registry</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Corporate Tree Survival & ESG Audit Portal
             </h1>
             <p className="text-xs text-stone-300 mt-1 max-w-xl leading-relaxed">
-              Transforming corporate tree plantation from a one-day photo-op into a multi-year survival
-              accountability contract. Answers the primary fiduciary question:
+              Verified environmental impact from individual trees to enterprise portfolios. Transforming corporate tree plantation from a one-day photo-op into a multi-year survival accountability contract. Answers the primary fiduciary question:
             </p>
             <div className="flex flex-wrap items-center gap-2 mt-3">
               <div className="inline-block px-3 py-1.5 bg-emerald-800/80 border border-emerald-400/40 rounded-xl text-xs font-bold text-emerald-100">
@@ -137,7 +136,7 @@ export const CSRDashboard: React.FC<CSRDashboardProps> = ({ projects, trees, onS
               <span>Configurable Survival Calculation Methodology</span>
             </h3>
             <p className="text-xs text-stone-500">
-              TreeWatch never manufactures survival numbers or hides unverified trees.
+              TreeView never manufactures survival numbers or hides unverified trees.
             </p>
           </div>
 

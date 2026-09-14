@@ -253,6 +253,7 @@ export type TreeScoreCategory =
   | '🌳 Surviving'
   | '🌳 Thriving'
   | '🌳 Established'
+  | '🏆 TreeView Champion'
   | '🏆 TreeWatch Champion';
 
 export interface TreeScoreComponents {

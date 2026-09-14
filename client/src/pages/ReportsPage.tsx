@@ -57,7 +57,7 @@ export const ReportsPage: React.FC<ReportsPageProps> = ({ projects, trees, onSel
               <span>Auditable Governance Reports</span>
             </div>
             <h1 className="text-2xl font-extrabold text-stone-900 tracking-tight">
-              Report Generation & Certifications
+              TreeView Verified Tree Survival & Impact Report
             </h1>
             <p className="text-xs text-stone-500 mt-0.5">
               Download formal PDF audit certificates and project-level CSV registers
@@ -188,7 +188,7 @@ export const ReportsPage: React.FC<ReportsPageProps> = ({ projects, trees, onSel
             <div className="border-b-2 border-stone-900 pb-4 flex justify-between items-start">
               <div>
                 <span className="text-[11px] font-mono font-bold text-emerald-800 uppercase tracking-widest block">
-                  TreeWatch Verified Survival Certificate • Every Tree Counts
+                  TreeView Verified Survival Certificate • Every tree counts, Verified Live
                 </span>
                 <h2 className="text-2xl font-extrabold text-stone-900 mt-1">
                   {selectedProject.name}
@@ -265,7 +265,7 @@ export const ReportsPage: React.FC<ReportsPageProps> = ({ projects, trees, onSel
             <div className="border-b-2 border-emerald-800 pb-4 flex justify-between items-start">
               <div>
                 <span className="text-[11px] font-mono font-bold text-emerald-800 uppercase tracking-widest block">
-                  TreeWatch Individual Survival Passport • Every Tree Counts. Keep It Alive.
+                  TreeView Individual Survival Passport • Every tree counts, Verified Live
                 </span>
                 <h2 className="text-2xl font-black text-stone-900 mt-1 font-mono">
                   {selectedTree.treeCode}

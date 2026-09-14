@@ -96,17 +96,16 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
           <div>
             <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1.5">
               <Trophy className="w-4 h-4" />
-              <span>TreeWatch Score™ Leadership System</span>
+              <span>TreeView Index™ Leadership System</span>
               <span className="px-2 py-0.5 bg-amber-500/20 text-amber-300 border border-amber-400/30 rounded-md text-[10px] font-bold">
                 DEMO BENCHMARK DATA
               </span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
-              Green Leadership & Survival Champions
+              Green Leaders
             </h1>
             <p className="text-xs sm:text-sm text-stone-300 mt-1 max-w-2xl leading-relaxed">
-              Rankings based on <strong>verified survival, tree health, and consistent care</strong> — never
-              raw planting numbers alone. Individuals are the prime drivers of our living canopy.
+              <strong>Every tree counts, Verified Live.</strong> Rankings are based on verified survival, tree health, consistent monitoring and stewardship — not raw planting numbers alone. Individuals are the prime drivers of our living canopy.
             </p>
 
             <div className="mt-4 flex flex-wrap items-center gap-3 text-xs">
@@ -123,7 +122,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
                   onClick={onOpenMethodology}
                   className="flex items-center gap-1 text-xs text-stone-400 hover:text-white underline transition-colors"
                 >
-                  <span>Read TreeScore v1.0 Methodology</span>
+                  <span>Read TreeView Index™ Methodology</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               )}
@@ -362,7 +361,7 @@ export const LeaderboardPage: React.FC<LeaderboardPageProps> = ({
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
           <span>
-            <strong>TreeWatch Integrity Pledge:</strong> Rankings are calculated directly from verified
+            <strong>TreeView Integrity Pledge:</strong> Rankings are calculated directly from verified
             photographs, timestamped audits, and geotags. Raw planting counts alone never determine leadership.
           </span>
         </div>

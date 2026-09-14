@@ -37,10 +37,10 @@ export const AnalyticsView: React.FC = () => {
             <span>Survival Science & Mathematical Accounting</span>
           </div>
           <h1 className="text-2xl font-extrabold text-stone-900 tracking-tight">
-            Survival Analytics & Trend Intelligence
+            TreeView Survival Analytics
           </h1>
           <p className="text-xs text-stone-500 mt-0.5">
-            Compare reporting methodologies, mortality breakdowns, and native species resilience
+            Evidence-based survival measurement and trend intelligence.
           </p>
         </div>
 

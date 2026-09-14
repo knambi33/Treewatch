@@ -27,14 +27,14 @@ export const QRViewerModal: React.FC<QRViewerModalProps> = ({ tree, onClose }) =
           <QrCode className="w-6 h-6" />
         </div>
 
-        <h3 className="text-lg font-bold text-stone-900">Tree Identity Tag</h3>
-        <p className="text-xs text-stone-700 mt-0.5">Attach near tree for instant profile verification</p>
+        <h3 className="text-lg font-bold text-stone-900">TreeView ID Tag</h3>
+        <p className="text-xs text-stone-700 mt-0.5">Attach near tree for instant profile verification • Every tree counts, Verified Live</p>
 
         {/* QR Card Container */}
         <div id="printable-qr-tag" className="my-5 p-4 bg-stone-50 border-2 border-dashed border-emerald-300 rounded-2xl flex flex-col items-center">
           <div className="bg-white p-3 rounded-xl shadow-xs border border-stone-200 mb-3">
             <QRCodeSVG
-              value={`https://treewatch.org/tree/${tree.treeCode}`}
+              value={`https://treeview.in/tree/${tree.treeCode}`}
               size={180}
               level="H"
               includeMargin={true}

@@ -120,7 +120,7 @@ export const TreeScoreBadge: React.FC<TreeScoreBadgeProps> = ({
           {isEstablished && (
             <span className="flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-md text-[10px] font-black uppercase tracking-wider shadow-xs animate-pulse">
               <Award className="w-3 h-3" />
-              <span>TreeWatch Established™</span>
+              <span>TreeView Established™</span>
             </span>
           )}
         </div>
