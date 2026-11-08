@@ -131,6 +131,13 @@ export const translations = {
     levelStateSub: 'State Forest & Green Covers',
     levelNational: '🇮🇳 India (National)',
     levelNationalSub: 'National Benchmark',
+
+    // Deepavali Festive Banner
+    deepavaliHeadline: 'Happy Deepavali to our Readers & Subscribers! 🪔✨',
+    deepavaliGreeting: 'May this Festival of Lights illuminate your life with good health, joy, and prosperity. Let us celebrate a green, sustainable Deepavali — plant, nurture, and keep trees alive!',
+    deepavaliBadge: 'Festival of Lights 🪔',
+    deepavaliPlantWish: 'Plant a Tree This Deepavali 🌱',
+    deepavaliEcoTip: 'Green & Living Deepavali',
   },
 
   ta: {
@@ -263,6 +270,13 @@ export const translations = {
     levelStateSub: 'மாநில காடுகள் & பசுமைப் போர்வைகள்',
     levelNational: '🇮🇳 இந்தியா (தேசியம்)',
     levelNationalSub: 'தேசிய அளவுகோல்',
+
+    // Deepavali Festive Banner
+    deepavaliHeadline: 'வாசகர்கள் மற்றும் சந்தாதாரர்கள் அனைவருக்கும் இனிய தீபாவளி நல்வாழ்த்துகள்! 🪔✨',
+    deepavaliGreeting: 'இந்த ஒளித் திருநாளில் உங்கள் இல்லங்களிலும் உள்ளங்களிலும் மகிழ்ச்சியும், நல்வாழ்வும், செழிப்பும் நிலவட்டும். மரங்களை நட்டு வளர்த்து பசுமையான தீபாவளியைக் கொண்டாடுவோம்!',
+    deepavaliBadge: 'தீபத் திருநாள் 🪔',
+    deepavaliPlantWish: 'இந்த தீபாவளிக்கு மரம் நடுக 🌱',
+    deepavaliEcoTip: 'பசுமை தீபாவளி வாழ்த்துகள்',
   },
 } as const;
 

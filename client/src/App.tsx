@@ -28,6 +28,7 @@ import { LeaderboardPage } from './pages/LeaderboardPage';
 import { MethodologyPage } from './pages/MethodologyPage';
 import { AdminConfigModal } from './components/common/AdminConfigModal';
 import { InstallPWAModal } from './components/common/InstallPWAModal';
+import { DeepavaliBanner } from './components/common/DeepavaliBanner';
 
 import { fetchTrees, fetchProjects, fetchOrganisations, fetchTreeDetails } from './api';
 import { Tree, Project, Organisation, TimelineEvent, Verification, TreePhoto } from './types';
@@ -175,6 +176,9 @@ function MainApp() {
         onOpenAdminConfig={() => setShowAdminConfigModal(true)}
         onOpenInstallPWA={!isPWAInstalled ? () => setShowInstallModal(true) : undefined}
       />
+
+      {/* Festive Deepavali Banner Wishing Readers & Subscribers */}
+      <DeepavaliBanner onPlantTreeClick={() => setShowRegisterModal(true)} />
 
       {/* Main Content Viewport wrapped in Device Frame Toggle */}
       <DeviceFrameToggle>

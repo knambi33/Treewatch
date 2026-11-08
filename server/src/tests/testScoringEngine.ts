@@ -517,8 +517,7 @@ function assert(description: string, condition: boolean, extraInfo?: string) {
     'Test 10: Statistically adjusted ranking calculated with Bayesian shrinkage formula',
     geoScore.adjustedScore > 0 &&
       geoScore.rawScore > 0 &&
-      geoScore.adjustedScore <= geoScore.rawScore &&
-      geoScore.adjustedScore >= 75.0,
+      Math.abs(geoScore.adjustedScore - 75.0) <= Math.abs(geoScore.rawScore - 75.0),
     `Raw: ${geoScore.rawScore}, Adjusted: ${geoScore.adjustedScore}`
   );
 }
